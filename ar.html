@@ -61,6 +61,18 @@ transform:translateY(20px);
 animation:fadeLogo 1.2s forwards;
 }
 
+.siteLogo{
+width:42px;
+height:42px;
+object-fit:contain;
+filter:brightness(1.3);
+}
+
+
+.light .siteLogo{
+filter:brightness(.6);
+}
+  
 /* glow behind logo */
 
 .logoStrip::after{
@@ -267,7 +279,10 @@ src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
 <div class="iconGrid">
 
 <a class="iconBtn website" href="https://www.nadimfoundation.org/">
-<i class="fa-solid fa-globe"></i>
+
+<img class="siteLogo"
+src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
+
 </a>
 
 <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/">
