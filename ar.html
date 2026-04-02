@@ -12,9 +12,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <style>
 
+/* PAGE */
+
 body{
 margin:0;
-font-family:Tahoma;
+font-family:Cairo;
 direction:rtl;
 text-align:center;
 background:#0f2024;
@@ -42,43 +44,12 @@ color:#0c4f57;
 
 .logoStrip{
 background:#e9f6f7;
-padding:18px;
+padding:22px;
 border-radius:0 0 40px 40px;
-position:relative;
 }
 
 .logo{
 width:140px;
-opacity:0;
-transform:translateY(20px);
-animation:fadeLogo 1.2s forwards;
-}
-
-@keyframes fadeLogo{
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* LOGO GLOW */
-
-.logoStrip::after{
-content:"";
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-width:180px;
-height:180px;
-background:radial-gradient(circle,#1fa3ad55,transparent 70%);
-filter:blur(25px);
-animation:logoGlow 4s infinite alternate;
-}
-
-@keyframes logoGlow{
-from{opacity:.3;transform:translate(-50%,-50%) scale(1)}
-to{opacity:.7;transform:translate(-50%,-50%) scale(1.2)}
 }
 
 /* GRID */
@@ -120,32 +91,28 @@ transition:.35s;
 .website{
 grid-column:1 / span 3;
 width:100%;
-height:90px;
+height:85px;
+
 display:flex;
 align-items:center;
 justify-content:center;
-gap:14px;
-font-size:18px;
-font-weight:bold;
+gap:12px;
+
+font-size:16px;
+font-weight:600;
 }
 
-/* WEBSITE LOGO */
+/* WEBSITE ICON */
 
 .siteLogo{
-width:34px;
-height:34px;
-object-fit:contain;
-filter:brightness(1.4);
-}
-
-.light .siteLogo{
-filter:brightness(.6);
+width:36px;
+height:36px;
 }
 
 /* HOVER */
 
 .iconBtn:hover{
-transform:translateY(-6px) scale(1.07);
+transform:translateY(-6px) scale(1.06);
 box-shadow:
 0 0 18px #1fa3ad,
 0 18px 40px rgba(0,0,0,.45);
@@ -235,11 +202,11 @@ transform:scale(.8) rotate(180deg);
 .footer{
 margin:30px;
 opacity:.6;
+font-size:14px;
 }
 
 </style>
 </head>
-
 
 <body>
 
@@ -250,52 +217,68 @@ src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
 
 <div class="iconGrid">
 
-<a class="iconBtn website" href="https://www.nadimfoundation.org/">
+<a class="iconBtn website"
+href="https://www.nadimfoundation.org/">
 
 <img class="siteLogo"
-src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
+src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg">
 
 <span>Official Website - الموقع الرسمي</span>
 
 </a>
 
-<a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA">
-<i class="fa-brands fa-youtube"></i>
-</a>
-
-<a class="iconBtn" href="https://www.instagram.com/nadimfoundation">
-<i class="fa-brands fa-instagram"></i>
-</a>
-
-<a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/">
+<a class="iconBtn"
+href="https://www.facebook.com/share/1Ak98MWsP4/">
 <i class="fa-brands fa-facebook-f"></i>
 </a>
 
-<a class="iconBtn" href="https://wa.me/201227799564">
-<i class="fa-brands fa-whatsapp"></i>
+<a class="iconBtn"
+href="https://www.instagram.com/nadimfoundation">
+<i class="fa-brands fa-instagram"></i>
 </a>
 
-<a class="iconBtn" href="mailto:info@nadimfoundation.org">
+<a class="iconBtn"
+href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA">
+<i class="fa-brands fa-youtube"></i>
+</a>
+
+<a class="iconBtn"
+href="https://www.linkedin.com/company/nadimfoundation/">
+<i class="fa-brands fa-linkedin-in"></i>
+</a>
+
+<a class="iconBtn"
+href="mailto:info@nadimfoundation.org">
 <i class="fa-solid fa-envelope"></i>
 </a>
 
-<a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/">
-<i class="fa-brands fa-linkedin-in"></i>
+<a class="iconBtn"
+href="https://wa.me/201227799564">
+<i class="fa-brands fa-whatsapp"></i>
 </a>
 
 </div>
 
 <div class="map">
-<iframe src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
-width="100%" height="100%" frameborder="0"></iframe>
+<iframe
+src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
+width="100%" height="100%" frameborder="0">
+</iframe>
 </div>
 
 <div class="floatingBar">
+
 <div class="ctrl" onclick="share()">🔗</div>
-<div class="ctrl" id="themeBtn" onclick="toggleTheme()">☀️</div>
+
+<div class="ctrl"
+id="themeBtn"
+onclick="toggleTheme()">☀️</div>
+
 </div>
 
-<div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
+<div class="footer">
+Nadim Foundation - مؤسسة نديم © ®
+</div>
 
 <script>
 
