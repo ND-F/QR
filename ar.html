@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -13,21 +12,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <style>
 
-/* PAGE LANDING ANIMATION */
-
 body{
 margin:0;
 font-family:Tahoma;
 direction:rtl;
 text-align:center;
-
 background:#0f2024;
 color:#e9f6f7;
-
 opacity:0;
 transform:translateY(20px);
 animation:pageIn 1s forwards;
-
 transition:.6s;
 padding-bottom:120px;
 }
@@ -44,8 +38,7 @@ background:#f4f7f8;
 color:#0c4f57;
 }
 
-
-/* LOGO */
+/* HEADER */
 
 .logoStrip{
 background:#e9f6f7;
@@ -61,19 +54,14 @@ transform:translateY(20px);
 animation:fadeLogo 1.2s forwards;
 }
 
-.siteLogo{
-width:42px;
-height:42px;
-object-fit:contain;
-filter:brightness(1.3);
+@keyframes fadeLogo{
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-
-.light .siteLogo{
-filter:brightness(.6);
-}
-  
-/* glow behind logo */
+/* LOGO GLOW */
 
 .logoStrip::after{
 content:"";
@@ -81,25 +69,16 @@ position:absolute;
 left:50%;
 top:50%;
 transform:translate(-50%,-50%);
-width:160px;
-height:160px;
-
+width:180px;
+height:180px;
 background:radial-gradient(circle,#1fa3ad55,transparent 70%);
-filter:blur(20px);
-
+filter:blur(25px);
 animation:logoGlow 4s infinite alternate;
 }
 
 @keyframes logoGlow{
 from{opacity:.3;transform:translate(-50%,-50%) scale(1)}
-to{opacity:.7;transform:translate(-50%,-50%) scale(1.15)}
-}
-
-@keyframes fadeLogo{
-to{
-opacity:1;
-transform:translateY(0);
-}
+to{opacity:.7;transform:translate(-50%,-50%) scale(1.2)}
 }
 
 /* GRID */
@@ -108,7 +87,6 @@ transform:translateY(0);
 width:90%;
 max-width:420px;
 margin:40px auto;
-
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:18px;
@@ -118,53 +96,62 @@ justify-items:center;
 /* ICON BUTTON */
 
 .iconBtn{
-
 position:relative;
 overflow:hidden;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 width:80px;
 height:80px;
-
 border-radius:22px;
 font-size:30px;
-
 color:#28c3cc;
 text-decoration:none;
-
 background:rgba(255,255,255,.06);
 backdrop-filter:blur(14px);
-
 box-shadow:
 0 10px 30px rgba(0,0,0,.35),
 inset 0 1px 0 rgba(255,255,255,.08);
-
 transition:.35s;
 }
 
-/* WEBSITE BIG */
+/* WEBSITE BUTTON */
 
 .website{
 grid-column:1 / span 3;
 width:100%;
 height:90px;
-font-size:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:14px;
+font-size:18px;
+font-weight:bold;
+}
+
+/* WEBSITE LOGO */
+
+.siteLogo{
+width:34px;
+height:34px;
+object-fit:contain;
+filter:brightness(1.4);
+}
+
+.light .siteLogo{
+filter:brightness(.6);
 }
 
 /* HOVER */
 
 .iconBtn:hover{
 transform:translateY(-6px) scale(1.07);
-
 box-shadow:
 0 0 18px #1fa3ad,
 0 18px 40px rgba(0,0,0,.45);
 }
 
-/* BOUNCE CLICK */
+/* BOUNCE */
 
 .iconBtn:active{
 animation:bounce .35s;
@@ -177,17 +164,15 @@ animation:bounce .35s;
 100%{transform:scale(1)}
 }
 
-/* RIPPLE EFFECT */
+/* RIPPLE */
 
 .iconBtn::after{
 content:"";
 position:absolute;
 width:10px;
 height:10px;
-
 background:#1fa3ad;
 border-radius:50%;
-
 opacity:0;
 transform:scale(1);
 }
@@ -197,14 +182,8 @@ animation:ripple .6s;
 }
 
 @keyframes ripple{
-0%{
-opacity:.6;
-transform:scale(1);
-}
-100%{
-opacity:0;
-transform:scale(20);
-}
+0%{opacity:.6;transform:scale(1);}
+100%{opacity:0;transform:scale(20);}
 }
 
 /* LIGHT MODE */
@@ -232,16 +211,12 @@ position:fixed;
 bottom:18px;
 left:50%;
 transform:translateX(-50%);
-
 padding:12px 22px;
 border-radius:40px;
-
 display:flex;
 gap:20px;
-
 background:rgba(255,255,255,.15);
 backdrop-filter:blur(14px);
-
 box-shadow:0 8px 30px rgba(0,0,0,.25);
 }
 
@@ -268,13 +243,10 @@ opacity:.6;
 
 <body>
 
-<div class="hero"></div>
-
 <div class="logoStrip">
 <img class="logo"
 src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
 </div>
-
 
 <div class="iconGrid">
 
@@ -283,49 +255,47 @@ src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
 <img class="siteLogo"
 src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
 
-</a>
+<span>Official Website - الموقع الرسمي</span>
 
-<a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/">
-<i class="fa-brands fa-facebook-f"></i>
-</a>
-
-<a class="iconBtn" href="https://www.instagram.com/nadimfoundation">
-<i class="fa-brands fa-instagram"></i>
 </a>
 
 <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA">
 <i class="fa-brands fa-youtube"></i>
 </a>
 
-<a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/">
-<i class="fa-brands fa-linkedin-in"></i>
+<a class="iconBtn" href="https://www.instagram.com/nadimfoundation">
+<i class="fa-brands fa-instagram"></i>
 </a>
 
-<a class="iconBtn" href="mailto:info@nadimfoundation.org">
-<i class="fa-solid fa-envelope"></i>
+<a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/">
+<i class="fa-brands fa-facebook-f"></i>
 </a>
 
 <a class="iconBtn" href="https://wa.me/201227799564">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-</div>
+<a class="iconBtn" href="mailto:info@nadimfoundation.org">
+<i class="fa-solid fa-envelope"></i>
+</a>
 
+<a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/">
+<i class="fa-brands fa-linkedin-in"></i>
+</a>
+
+</div>
 
 <div class="map">
 <iframe src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
 width="100%" height="100%" frameborder="0"></iframe>
 </div>
 
-
 <div class="floatingBar">
 <div class="ctrl" onclick="share()">🔗</div>
 <div class="ctrl" id="themeBtn" onclick="toggleTheme()">☀️</div>
-<a class="ctrl" href="en.html">🌐</a>
 </div>
 
 <div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
-
 
 <script>
 
