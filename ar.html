@@ -1,22 +1,28 @@
+```html
 <!DOCTYPE html>
 <html lang="ar">
-<head> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>مؤسسة نديم</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
+/* BODY */
 
 body{
 margin:0;
 font-family:Tahoma;
 text-align:center;
 direction:rtl;
-transition:background .6s ease,color .6s ease;
 background:#0f2024;
 color:#e9f6f7;
-padding-bottom:100px;
+transition:.6s;
+padding-bottom:120px;
 }
 
 .light{
@@ -24,28 +30,13 @@ background:#f4f7f8;
 color:#0c4f57;
 }
 
+/* HERO */
+
 .hero{
 height:130px;
 background:linear-gradient(-45deg,#0c4f57,#0f6c75,#148b96,#0c4f57);
 background-size:400% 400%;
 animation:gradient 12s ease infinite;
-position:relative;
-overflow:hidden;
-}
-
-.hero::after{
-content:"";
-position:absolute;
-width:200%;
-height:200%;
-background:radial-gradient(circle,#ffffff10 10%,transparent 60%);
-animation:pulse 8s infinite;
-}
-
-@keyframes pulse{
-0%{transform:translate(-20%,-20%) scale(1)}
-50%{transform:translate(-10%,-10%) scale(1.2)}
-100%{transform:translate(-20%,-20%) scale(1)}
 }
 
 @keyframes gradient{
@@ -53,6 +44,8 @@ animation:pulse 8s infinite;
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
+
+/* LOGO */
 
 .logoStrip{
 background:#e9f6f7;
@@ -62,45 +55,127 @@ border-radius:0 0 40px 40px;
 
 .logo{
 width:140px;
-max-width:70%;
 opacity:0;
-transform:translateY(25px);
-animation:fadeLogo 1.4s forwards;
+transform:translateY(20px);
+animation:fadeLogo 1.2s forwards;
 }
 
 @keyframes fadeLogo{
-to{opacity:1;transform:translateY(0)}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-.btn{
+/* ICON GRID */
+
+.iconGrid{
+width:90%;
+max-width:420px;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+justify-items:center;
+}
+
+/* ICON BOX */
+
+.iconBtn{
 display:flex;
-justify-content:center;
 align-items:center;
-background:#17363c;
-margin:12px auto;
-width:70px;
-height:70px;
-border-radius:16px;
-font-size:26px;
+justify-content:center;
+
+width:80px;
+height:80px;
+
+border-radius:22px;
+font-size:30px;
+
+text-decoration:none;
+
+color:#28c3cc;
+
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(14px);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.35),
+inset 0 1px 0 rgba(255,255,255,.08);
+
+transition:.35s;
+
+opacity:0;
+transform:translateY(30px);
+animation:iconIn .8s forwards;
 }
 
-.light .btn{
-background:white;
+/* stagger animation */
+
+.iconBtn:nth-child(1){animation-delay:.1s}
+.iconBtn:nth-child(2){animation-delay:.2s}
+.iconBtn:nth-child(3){animation-delay:.3s}
+.iconBtn:nth-child(4){animation-delay:.4s}
+.iconBtn:nth-child(5){animation-delay:.5s}
+.iconBtn:nth-child(6){animation-delay:.6s}
+.iconBtn:nth-child(7){animation-delay:.7s}
+
+@keyframes iconIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* HOVER */
+
+.iconBtn:hover{
+transform:translateY(-6px) scale(1.08);
+
+box-shadow:
+0 0 18px #1fa3ad,
+0 18px 40px rgba(0,0,0,.45);
+
+animation:shake .25s;
+}
+
+@keyframes shake{
+0%{transform:translateY(-6px) rotate(0)}
+25%{transform:translateY(-6px) rotate(2deg)}
+50%{transform:translateY(-6px) rotate(-2deg)}
+75%{transform:translateY(-6px) rotate(1deg)}
+100%{transform:translateY(-6px) rotate(0)}
+}
+
+/* LIGHT MODE ICONS */
+
+.light .iconBtn{
+background:rgba(255,255,255,.75);
 color:#0c4f57;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.12),
+inset 0 1px 0 rgba(255,255,255,.8);
 }
 
-.btn:hover{
-transform:translateY(-3px) scale(1.02);
+.light .iconBtn:hover{
+box-shadow:
+0 0 14px #0c4f57,
+0 12px 25px rgba(0,0,0,.2);
 }
+
+/* MAP */
 
 .map{
-margin:20px auto;
+margin:30px auto;
 width:90%;
 max-width:420px;
 height:150px;
 border-radius:18px;
 overflow:hidden;
 }
+
+/* FLOATING BAR */
 
 .floatingBar{
 position:fixed;
@@ -109,23 +184,27 @@ left:50%;
 transform:translateX(-50%);
 padding:12px 22px;
 border-radius:40px;
+
 display:flex;
 gap:20px;
+
 backdrop-filter:blur(14px);
 background:rgba(255,255,255,.15);
+
 box-shadow:0 8px 30px rgba(0,0,0,.25);
-z-index:999;
 }
 
 .ctrl{
 font-size:22px;
 cursor:pointer;
-transition:.4s;
+transition:.3s;
 }
 
 .ctrl:active{
 transform:scale(.8) rotate(180deg);
 }
+
+/* FOOTER */
 
 .footer{
 margin:30px;
@@ -144,38 +223,45 @@ opacity:.6;
 src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
 </div>
 
-<a class="btn" href="https://www.nadimfoundation.org/">
+
+<div class="iconGrid">
+
+<a class="iconBtn" href="https://www.nadimfoundation.org/">
 <i class="fa-solid fa-globe"></i>
 </a>
 
-<a class="btn" href="https://www.facebook.com/share/1Ak98MWsP4/">
+<a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/">
 <i class="fa-brands fa-facebook-f"></i>
 </a>
 
-<a class="btn" href="https://www.instagram.com/nadimfoundation">
+<a class="iconBtn" href="https://www.instagram.com/nadimfoundation">
 <i class="fa-brands fa-instagram"></i>
 </a>
 
-<a class="btn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA">
+<a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA">
 <i class="fa-brands fa-youtube"></i>
 </a>
 
-<a class="btn" href="https://wa.me/201227799564">
+<a class="iconBtn" href="https://wa.me/201227799564">
 <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-<a class="btn" href="mailto:info@nadimfoundation.org">
+<a class="iconBtn" href="mailto:info@nadimfoundation.org">
 <i class="fa-solid fa-envelope"></i>
 </a>
 
-<a class="btn" href="https://www.linkedin.com/company/nadimfoundation/">
+<a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/">
 <i class="fa-brands fa-linkedin-in"></i>
 </a>
+
+</div>
+
 
 <div class="map">
 <iframe src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
 width="100%" height="100%" frameborder="0"></iframe>
 </div>
+
 
 <div class="floatingBar">
 <div class="ctrl" onclick="share()">🔗</div>
@@ -183,7 +269,9 @@ width="100%" height="100%" frameborder="0"></iframe>
 <a class="ctrl" href="en.html">🌐</a>
 </div>
 
+
 <div class="footer">مؤسسة نديم © ®</div>
+
 
 <script>
 
@@ -229,3 +317,4 @@ url:window.location.href
 
 </body>
 </html>
+```
