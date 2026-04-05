@@ -1,119 +1,182 @@
-<style>
-/* تحسين الأداء العام */
-body {
-    margin: 0;
-    font-family: system-ui, Arial, sans-serif;
-    text-align: center;
-    background: #0f2024;
-    color: #e9f6f7;
-    /* أزلنا الانتقال العام والأنيميشن من هنا */
-    padding-bottom: 120px;
-    -webkit-font-smoothing: antialiased; /* تحسين الخط لسفاري */
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadim Foundation - مؤسسة نديم</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-/* حاوية للأنيميشن بدلاً من الجسم بالكامل */
-.page-wrapper {
-    opacity: 0;
-    transform: translateY(15px);
-    animation: pageIn .5s ease-out forwards;
-}
+    <style>
+        /* 1. إعدادات الصفحة الأساسية - تم إزالة opacity: 0 لتجنب الاختفاء */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            text-align: center;
+            background-color: #0f2024; /* اللون الداكن */
+            color: #e9f6f7;
+            transition: background-color 0.3s ease;
+            padding-bottom: 100px;
+        }
 
-@keyframes pageIn {
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* الثيم الفاتح */
+        body.light {
+            background-color: #f4f7f8;
+            color: #0c4f57;
+        }
 
-/* تحسين انتقال الألوان عند تغيير الثيم */
-.light {
-    background: #f4f7f8;
-    color: #0c4f57;
-}
+        /* 2. الهيدر (اللوجو) */
+        .logoStrip {
+            background: #e9f6f7;
+            padding: 20px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .logo { width: 130px; height: auto; }
 
-/* تحديد الانتقال للألوان فقط لتقليل الجهد */
-body.light, body {
-    transition: background-color 0.3s ease;
-}
+        /* 3. الشبكة (الأزرار) */
+        .iconGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-/* HEADER */
-.logoStrip {
-    background: #e9f6f7;
-    padding: 22px;
-    border-radius: 0 0 40px 40px;
-}
+        /* زر الموقع الرسمي (يأخذ السطر بالكامل) */
+        .website {
+            grid-column: 1 / span 3;
+            background: rgba(40, 195, 204, 0.2) !important;
+            border: 1px solid #28c3cc;
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 10px;
+            font-weight: bold;
+        }
 
-.logo { width: 140px; height: auto; }
+        .iconBtn {
+            background: rgba(255, 255, 255, 0.1);
+            aspect-ratio: 1/1;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #28c3cc;
+            font-size: 28px;
+            transition: transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* GRID */
-.iconGrid {
-    width: 90%;
-    max-width: 420px;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    justify-items: center;
-}
+        .light .iconBtn { background: rgba(0, 0, 0, 0.05); color: #0c4f57; }
 
-/* ICON BUTTON */
-.iconBtn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 22px;
-    font-size: 30px;
-    color: #28c3cc;
-    text-decoration: none;
-    background: rgba(255,255,255,.08);
-    box-shadow: 0 8px 20px rgba(0,0,0,.15);
-    transition: transform .2s, box-shadow .2s;
-    /* تحسين الأداء في سفاري */
-    will-change: transform;
-}
+        .iconBtn:active { transform: scale(0.9); }
 
-/* تأثيرات الـ Hover المفرطة تسبب ثقلاً في سفاري، تم تبسيطها */
-.iconBtn:active {
-    transform: scale(0.9);
-}
+        .siteLogo { width: 30px; height: 30px; }
+        .website span { font-size: 14px; }
 
-.light .iconBtn {
-    background: rgba(0,0,0,.05);
-    color: #0c4f57;
-}
+        /* 4. الخريطة - تم إصلاح الرابط وتخفيف الحجم */
+        .mapContainer {
+            width: 90%;
+            max-width: 400px;
+            height: 150px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #1a2e33;
+        }
 
-/* MAP */
-.map {
-    margin: 30px auto;
-    width: 90%;
-    max-width: 420px;
-    height: 150px;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #eee; /* لون مؤقت */
-}
+        /* 5. الشريط العائم السفلي */
+        .floatingBar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: flex;
+            gap: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
 
-/* FLOAT BAR */
-.floatingBar {
-    position: fixed;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    border-radius: 40px;
-    display: flex;
-    gap: 18px;
-    background: rgba(255,255,255,.2);
-    backdrop-filter: blur(10px); /* يعمل جيداً إذا كان وحيداً */
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 6px 20px rgba(0,0,0,.2);
-    z-index: 1000;
-}
-</style>
+        .ctrl { font-size: 22px; cursor: pointer; }
 
-<div class="page-wrapper">
+        .footer { margin-top: 40px; font-size: 12px; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
     <div class="logoStrip">
         <img class="logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png" alt="Nadim Foundation">
     </div>
-    
+
+    <div class="iconGrid">
+        <a class="iconBtn website" href="https://www.nadimfoundation.org/">
+            <img class="siteLogo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg">
+            <span>الموقع الرسمي - Official Website</span>
+        </a>
+
+        <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="iconBtn" href="https://www.instagram.com/nadimfoundation"><i class="fa-brands fa-instagram"></i></a>
+        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA"><i class="fa-brands fa-youtube"></i></a>
+        <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a class="iconBtn" href="mailto:info@nadimfoundation.org"><i class="fa-solid fa-envelope"></i></a>
+        <a class="iconBtn" href="https://wa.me/201227799564"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
+
+    <div class="mapContainer">
+        <iframe width="100%" height="100%" frameborder="0" style="border:0" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.1!2d31.2!3d30.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAwJzAwLjAiTiAzMcKwMTInMDAuMCJF!5e0!3m2!1sen!2seg!4v123456789" allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="footer">
+        Nadim Foundation - مؤسسة نديم ©
+    </div>
+
+    <div class="floatingBar">
+        <div class="ctrl" onclick="share()">🔗</div>
+        <div class="ctrl" id="themeBtn" onclick="toggleTheme()">☀️</div>
+    </div>
+
+    <script>
+        const body = document.body;
+        const themeBtn = document.getElementById("themeBtn");
+
+        // استرجاع الثيم المحفوظ
+        if(localStorage.getItem("theme") === "light") {
+            body.classList.add("light");
+            themeBtn.innerHTML = "🌙";
+        }
+
+        function toggleTheme() {
+            body.classList.toggle("light");
+            if(body.classList.contains("light")) {
+                themeBtn.innerHTML = "🌙";
+                localStorage.setItem("theme", "light");
+            } else {
+                themeBtn.innerHTML = "☀️";
+                localStorage.setItem("theme", "dark");
+            }
+        }
+
+        function share() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Nadim Foundation',
+                    url: window.location.href
+                });
+            } else {
+                alert("رابط الصفحة: " + window.location.href);
+            }
+        }
+    </script>
+</body>
+</html>
