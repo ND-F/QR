@@ -1,182 +1,337 @@
+
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nadim Foundation - مؤسسة نديم</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        /* 1. إعدادات الصفحة الأساسية - تم إزالة opacity: 0 لتجنب الاختفاء */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, sans-serif;
-            text-align: center;
-            background-color: #0f2024; /* اللون الداكن */
-            color: #e9f6f7;
-            transition: background-color 0.3s ease;
-            padding-bottom: 100px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* الثيم الفاتح */
-        body.light {
-            background-color: #f4f7f8;
-            color: #0c4f57;
-        }
+<title>Nadim Foundation - مؤسسة نديم</title>
 
-        /* 2. الهيدر (اللوجو) */
-        .logoStrip {
-            background: #e9f6f7;
-            padding: 20px;
-            border-radius: 0 0 30px 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .logo { width: 130px; height: auto; }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        /* 3. الشبكة (الأزرار) */
-        .iconGrid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            width: 90%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
+<style>
 
-        /* زر الموقع الرسمي (يأخذ السطر بالكامل) */
-        .website {
-            grid-column: 1 / span 3;
-            background: rgba(40, 195, 204, 0.2) !important;
-            border: 1px solid #28c3cc;
-            display: flex !important;
-            flex-direction: row !important;
-            gap: 10px;
-            font-weight: bold;
-        }
+/* PAGE */
 
-        .iconBtn {
-            background: rgba(255, 255, 255, 0.1);
-            aspect-ratio: 1/1;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #28c3cc;
-            font-size: 28px;
-            transition: transform 0.2s;
-            -webkit-tap-highlight-color: transparent;
-        }
+body{
+margin:0;
+font-family:system-ui, Arial, sans-serif;
+text-align:center;
+background:#0f2024;
+color:#e9f6f7;
+opacity:0;
+transform:translateY(20px);
+animation:pageIn .6s forwards;
+transition:.4s;
+padding-bottom:120px;
+}
 
-        .light .iconBtn { background: rgba(0, 0, 0, 0.05); color: #0c4f57; }
+@keyframes pageIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 
-        .iconBtn:active { transform: scale(0.9); }
+.light{
+background:#f4f7f8;
+color:#0c4f57;
+}
 
-        .siteLogo { width: 30px; height: 30px; }
-        .website span { font-size: 14px; }
+/* HEADER */
 
-        /* 4. الخريطة - تم إصلاح الرابط وتخفيف الحجم */
-        .mapContainer {
-            width: 90%;
-            max-width: 400px;
-            height: 150px;
-            margin: 30px auto;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #1a2e33;
-        }
+.logoStrip{
+background:#e9f6f7;
+padding:22px;
+border-radius:0 0 40px 40px;
+}
 
-        /* 5. الشريط العائم السفلي */
-        .floatingBar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            padding: 10px 25px;
-            border-radius: 50px;
-            display: flex;
-            gap: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            z-index: 999;
-        }
+.logo{
+width:140px;
+}
 
-        .ctrl { font-size: 22px; cursor: pointer; }
+/* GRID */
 
-        .footer { margin-top: 40px; font-size: 12px; opacity: 0.6; }
-    </style>
+.iconGrid{
+width:90%;
+max-width:420px;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+justify-items:center;
+}
+
+/* ICON BUTTON */
+
+.iconBtn{
+position:relative;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+width:80px;
+height:80px;
+border-radius:22px;
+font-size:30px;
+color:#28c3cc;
+text-decoration:none;
+
+/* تم تقليل التأثيرات الثقيلة */
+background:rgba(255,255,255,.08);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.25);
+
+transition:.25s;
+}
+
+/* WEBSITE BUTTON */
+
+.website{
+grid-column:1 / span 3;
+width:100%;
+height:80px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+
+font-size:15px;
+font-weight:600;
+}
+
+/* WEBSITE ICON */
+
+.siteLogo{
+width:36px;
+height:36px;
+}
+
+/* HOVER */
+
+.iconBtn:hover{
+transform:translateY(-4px) scale(1.05);
+box-shadow:
+0 0 14px #1fa3ad,
+0 14px 28px rgba(0,0,0,.35);
+}
+
+/* BOUNCE */
+
+.iconBtn:active{
+animation:bounce .3s;
+}
+
+@keyframes bounce{
+0%{transform:scale(1)}
+40%{transform:scale(1.2)}
+70%{transform:scale(.92)}
+100%{transform:scale(1)}
+}
+
+/* RIPPLE */
+
+.iconBtn::after{
+content:"";
+position:absolute;
+width:10px;
+height:10px;
+background:#1fa3ad;
+border-radius:50%;
+opacity:0;
+transform:scale(1);
+}
+
+.iconBtn:active::after{
+animation:ripple .5s;
+}
+
+@keyframes ripple{
+0%{opacity:.6;transform:scale(1);}
+100%{opacity:0;transform:scale(20);}
+}
+
+/* LIGHT MODE */
+
+.light .iconBtn{
+background:rgba(255,255,255,.85);
+color:#0c4f57;
+}
+
+/* MAP */
+
+.map{
+margin:30px auto;
+width:90%;
+max-width:420px;
+height:150px;
+border-radius:18px;
+overflow:hidden;
+}
+
+/* FLOAT BAR */
+
+.floatingBar{
+position:fixed;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+padding:10px 20px;
+border-radius:40px;
+display:flex;
+gap:18px;
+
+/* إزالة blur الثقيل */
+background:rgba(255,255,255,.2);
+
+box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.ctrl{
+font-size:22px;
+cursor:pointer;
+transition:.25s;
+}
+
+.ctrl:active{
+transform:scale(.85);
+}
+
+/* FOOTER */
+
+.footer{
+margin:30px;
+opacity:.6;
+font-size:14px;
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="logoStrip">
-        <img class="logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png" alt="Nadim Foundation">
-    </div>
+<div class="logoStrip">
+<img class="logo"
+loading="lazy"
+src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png">
+</div>
 
-    <div class="iconGrid">
-        <a class="iconBtn website" href="https://www.nadimfoundation.org/">
-            <img class="siteLogo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg">
-            <span>الموقع الرسمي - Official Website</span>
-        </a>
+<div class="iconGrid">
 
-        <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/"><i class="fa-brands fa-facebook-f"></i></a>
-        <a class="iconBtn" href="https://www.instagram.com/nadimfoundation"><i class="fa-brands fa-instagram"></i></a>
-        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA"><i class="fa-brands fa-youtube"></i></a>
-        <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a class="iconBtn" href="mailto:info@nadimfoundation.org"><i class="fa-solid fa-envelope"></i></a>
-        <a class="iconBtn" href="https://wa.me/201227799564"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
+<a class="iconBtn website"
+href="https://www.nadimfoundation.org/">
 
-    <div class="mapContainer">
-        <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.1!2d31.2!3d30.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAwJzAwLjAiTiAzMcKwMTInMDAuMCJF!5e0!3m2!1sen!2seg!4v123456789" allowfullscreen>
-        </iframe>
-    </div>
+<img class="siteLogo"
+loading="lazy"
+src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg">
 
-    <div class="footer">
-        Nadim Foundation - مؤسسة نديم ©
-    </div>
+<span>Official Website - الموقع الرسمي</span>
 
-    <div class="floatingBar">
-        <div class="ctrl" onclick="share()">🔗</div>
-        <div class="ctrl" id="themeBtn" onclick="toggleTheme()">☀️</div>
-    </div>
+</a>
 
-    <script>
-        const body = document.body;
-        const themeBtn = document.getElementById("themeBtn");
+<a class="iconBtn"
+href="https://www.facebook.com/share/1Ak98MWsP4/">
+<i class="fa-brands fa-facebook-f"></i>
+</a>
 
-        // استرجاع الثيم المحفوظ
-        if(localStorage.getItem("theme") === "light") {
-            body.classList.add("light");
-            themeBtn.innerHTML = "🌙";
-        }
+<a class="iconBtn"
+href="https://www.instagram.com/nadimfoundation">
+<i class="fa-brands fa-instagram"></i>
+</a>
 
-        function toggleTheme() {
-            body.classList.toggle("light");
-            if(body.classList.contains("light")) {
-                themeBtn.innerHTML = "🌙";
-                localStorage.setItem("theme", "light");
-            } else {
-                themeBtn.innerHTML = "☀️";
-                localStorage.setItem("theme", "dark");
-            }
-        }
+<a class="iconBtn"
+href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA">
+<i class="fa-brands fa-youtube"></i>
+</a>
 
-        function share() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Nadim Foundation',
-                    url: window.location.href
-                });
-            } else {
-                alert("رابط الصفحة: " + window.location.href);
-            }
-        }
-    </script>
+<a class="iconBtn"
+href="https://www.linkedin.com/company/nadimfoundation/">
+<i class="fa-brands fa-linkedin-in"></i>
+</a>
+
+<a class="iconBtn"
+href="mailto:info@nadimfoundation.org">
+<i class="fa-solid fa-envelope"></i>
+</a>
+
+<a class="iconBtn"
+href="https://wa.me/201227799564">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+</div>
+
+<div class="map">
+
+<iframe
+loading="lazy"
+src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
+width="100%" height="100%" frameborder="0">
+</iframe>
+
+</div>
+
+<div class="floatingBar">
+
+<div class="ctrl" onclick="share()">🔗</div>
+
+<div class="ctrl"
+id="themeBtn"
+onclick="toggleTheme()">☀️</div>
+
+</div>
+
+<div class="footer">
+Nadim Foundation - مؤسسة نديم © ®
+</div>
+
+<script>
+
+const body=document.body;
+const btn=document.getElementById("themeBtn");
+
+if(localStorage.getItem("theme")==null){
+if(window.matchMedia('(prefers-color-scheme: light)').matches){
+body.classList.add("light");
+btn.innerHTML="🌙";
+}else{
+btn.innerHTML="☀️";
+}
+}else{
+if(localStorage.getItem("theme")=="light"){
+body.classList.add("light");
+btn.innerHTML="🌙";
+}else{
+btn.innerHTML="☀️";
+}
+}
+
+function toggleTheme(){
+body.classList.toggle("light");
+
+if(body.classList.contains("light")){
+btn.innerHTML="🌙";
+localStorage.setItem("theme","light");
+}else{
+btn.innerHTML="☀️";
+localStorage.setItem("theme","dark");
+}
+}
+
+function share(){
+if(navigator.share){
+navigator.share({
+title:"Nadim Foundation - مؤسسة نديم",
+url:window.location.href
+});
+}
+}
+
+</script>
+
 </body>
 </html>
