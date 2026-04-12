@@ -46,7 +46,7 @@
             direction: ltr !important; 
         }
 
-        /* ICON BUTTONS */
+        /* ICON BUTTONS (Default / Dark Mode) */
         .iconBtn {
             position: relative;
             display: flex;
@@ -57,16 +57,16 @@
             border-radius: 26px;
             font-size: 35px;
             text-decoration: none;
-            background: var(--main);
+            background: var(--main); /* البوكس نفس لون الخلفية في الدارك */
             color: var(--light);
-            border: 2px solid rgba(234, 232, 216, 0.2);
+            border: 2px solid rgba(234, 232, 216, 0.1);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             -webkit-tap-highlight-color: transparent;
             z-index: 1;
         }
 
-        /* Tooltip (بالونة الكلام) */
+        /* Tooltip */
         .iconBtn::before, .ctrl::before {
             content: attr(data-tooltip);
             position: absolute;
@@ -96,7 +96,7 @@
         @media (hover: hover) {
             .iconBtn:hover, .ctrl:hover {
                 transform: scale(1.12) translateY(-10px);
-                color: var(--gold);
+                color: var(--gold) !important;
                 border-color: var(--gold);
                 background: rgba(234, 232, 216, 0.1);
                 box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
@@ -111,14 +111,12 @@
             grid-column: 1 / span 3;
             width: 100%;
             height: 85px;
-            background: var(--main);
-            color: var(--light);
             font-size: 18px;
             font-weight: 700;
-            display: flex; /* لضمان محاذاة اللوجو والنص بجانب بعضهما */
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* مسافة بين اللوجو والنص */
+            gap: 15px;
             margin-bottom: 10px;
         }
         .siteLogo { width: 38px; height: 38px; flex-shrink: 0; }
@@ -162,10 +160,20 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* LIGHT MODE */
+        /* LIGHT MODE (التعديل المطلوب) */
         .light { background: var(--light); color: var(--main); }
-        .light .iconBtn { background: var(--main); color: var(--light); border: 2px solid rgba(234, 232, 216, 0.2); }
+        
+        .light .iconBtn { 
+            background: var(--light); /* البوكس نفس لون الخلفية في اللايت */
+            color: var(--main);       /* الأيقونة باللون الأخضر الغامق */
+            border: 2px solid rgba(6, 68, 76, 0.1); 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* بالونة الكلام في اللايت مود */
         .light .iconBtn::before, .light .ctrl::before { background: var(--main); color: var(--light); }
+        
+        /* الحفاظ على ألوان شريط التحكم السفلي كما طلبت */
         .light .ctrl { color: white; }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; }
