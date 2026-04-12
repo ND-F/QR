@@ -14,7 +14,7 @@
         :root { 
             --main: #06444C; 
             --light: #EAE8D8; 
-            --gold: #E1A93E; /* الذهبي الأصلي والمعتمد */
+            --gold: #E1A93E; 
         }
 
         body {
@@ -50,7 +50,7 @@
             direction: ltr !important; 
         }
 
-        /* ICON BUTTONS (Dark Mode Default) */
+        /* ICON BUTTONS */
         .iconBtn {
             position: relative;
             display: flex;
@@ -61,28 +61,34 @@
             border-radius: 26px;
             font-size: 35px;
             text-decoration: none;
-            background: var(--main);
+            background: var(--main); /* لون الخلفية الافتراضي للدارك */
             color: var(--light);
-            border: 2px solid var(--gold); /* الحواف الذهبية المعتمدة */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid transparent; /* الحافة مخفية افتراضياً */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             -webkit-tap-highlight-color: transparent;
             z-index: 1;
         }
 
-        /* Pop-out Animation */
+        /* التفاعل عند الماوس (Hover) */
         @media (hover: hover) {
-            .iconBtn:hover, .ctrl:hover {
+            .iconBtn:hover {
                 transform: scale(1.12) translateY(-10px);
                 color: var(--gold) !important;
-                border-color: var(--gold);
+                border-color: var(--gold); /* تظهر الحافة الذهبية هنا فقط */
                 background: rgba(234, 232, 216, 0.05);
                 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
                 z-index: 10;
             }
         }
 
-        .iconBtn:active, .ctrl:active { transform: scale(0.95); }
+        /* التفاعل عند اللمس (Mobile Active) */
+        .iconBtn:active {
+            transform: scale(1.1) translateY(-5px);
+            border-color: var(--gold); /* تظهر الحافة عند اللمس في الموبايل */
+            color: var(--gold) !important;
+            transition: all 0.1s;
+        }
 
         /* Tooltip */
         .iconBtn::before, .ctrl::before {
@@ -137,7 +143,7 @@
             height: 180px;
             border-radius: 28px;
             overflow: hidden;
-            border: 3px solid var(--gold); /* الحواف الذهبية للخريطة */
+            border: 3px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         .map iframe { width: 100%; height: 100%; border: 0; }
@@ -170,17 +176,19 @@
 
         /* LIGHT MODE */
         .light { background: var(--light); color: var(--main); }
-        
         .light .iconBtn { 
-            background: var(--light); /* البوكس لون الخلفية */
-            color: var(--main);       /* الأيقونة خضراء غامقة */
-            border: 2px solid var(--gold); /* الحواف ذهبية #E1A93E للبروز */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            background: var(--light); /* البوكس مختفي في الخلفية الكريمي */
+            color: var(--main);       /* الرمز أخضر غامق */
+            border-color: transparent;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
         }
+        .light .website { background: var(--light); border: 2px solid transparent; }
         
-        .light .website { background: var(--light); border: 2px solid var(--gold); }
-        .light .iconBtn::before, .light .ctrl::before { background: var(--main); color: var(--light); }
-        .light .ctrl { color: white; }
+        /* تفعيل الحواف الذهبية في اللايت مود عند التفاعل */
+        .light .iconBtn:hover, .light .iconBtn:active { 
+            border-color: var(--gold); 
+            background: var(--light); 
+        }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; }
         .lang-ar { direction: rtl; }
@@ -203,14 +211,14 @@
 
         <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" data-ar="فيسبوك" data-en="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a class="iconBtn" href="https://www.instagram.com/nadimfoundation" data-ar="إنستجرام" data-en="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" data-ar=" يوتيوب" data-en="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" data-ar="يوتيوب" data-en="YouTube"><i class="fa-brands fa-youtube"></i></a>
         <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/" data-ar="لينكد إن" data-en="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
         <a class="iconBtn" href="mailto:info@nadimfoundation.org" data-ar="بريد إلكتروني" data-en="Email"><i class="fa-solid fa-envelope"></i></a>
         <a class="iconBtn" href="https://wa.me/201227799564" data-ar="واتساب" data-en="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
 
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.6625442525795!2d31.2415!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzM5LjgiTiAzMcKwMTQnMjkuNCJF!5e0!3m2!1sen!2seg!4v1618220000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.0261313426863!2d31.23233867623916!3d30.03611311829672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840ca827e85c1%3A0xe54ef99507f35a51!2sNadim%20Foundation!5e0!3m2!1sen!2seg!4v1712918000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
@@ -238,7 +246,6 @@
         });
         
         webText.innerHTML = currentLang === 'ar' ? "الموقع الرئيسي" : "Official Website";
-        body.className = currentLang === 'ar' ? 'lang-ar' : 'lang-en';
         
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
