@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        :root { --main: #06444C; --light: #EAE8D8; --gold: #E1A93E; }
+        :root { 
+            --main: #06444C; 
+            --light: #EAE8D8; 
+            --gold: #E1A93E; /* الذهبي الأصلي والمعتمد */
+        }
 
         body {
             margin: 0; padding: 0;
@@ -59,12 +63,26 @@
             text-decoration: none;
             background: var(--main);
             color: var(--light);
-            border: 2px solid var(--gold); /* حواف ذهبية صريحة للبروز */
+            border: 2px solid var(--gold); /* الحواف الذهبية المعتمدة */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             -webkit-tap-highlight-color: transparent;
             z-index: 1;
         }
+
+        /* Pop-out Animation */
+        @media (hover: hover) {
+            .iconBtn:hover, .ctrl:hover {
+                transform: scale(1.12) translateY(-10px);
+                color: var(--gold) !important;
+                border-color: var(--gold);
+                background: rgba(234, 232, 216, 0.05);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+                z-index: 10;
+            }
+        }
+
+        .iconBtn:active, .ctrl:active { transform: scale(0.95); }
 
         /* Tooltip */
         .iconBtn::before, .ctrl::before {
@@ -94,19 +112,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        @media (hover: hover) {
-            .iconBtn:hover, .ctrl:hover {
-                transform: scale(1.12) translateY(-10px);
-                color: var(--gold) !important;
-                border-color: var(--gold);
-                background: rgba(234, 232, 216, 0.05);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-                z-index: 10;
-            }
-        }
-
-        .iconBtn:active, .ctrl:active { transform: scale(0.95); }
-
         /* WEBSITE BUTTON */
         .website {
             grid-column: 1 / span 3;
@@ -129,10 +134,10 @@
             margin: 50px auto;
             width: 90%;
             max-width: 450px;
-            height: 170px;
+            height: 180px;
             border-radius: 28px;
             overflow: hidden;
-            border: 3.5px solid var(--gold);
+            border: 3px solid var(--gold); /* الحواف الذهبية للخريطة */
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         .map iframe { width: 100%; height: 100%; border: 0; }
@@ -163,20 +168,18 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* LIGHT MODE (المطلوب: بروز ذهبي ونفس هيبة الغامق) */
+        /* LIGHT MODE */
         .light { background: var(--light); color: var(--main); }
         
         .light .iconBtn { 
-            background: var(--light); /* البوكس نفس لون الخلفية الكريمي */
-            color: var(--main);       /* الأيقونة داخلية خضراء غامقة */
-            border: 2px solid var(--gold); /* الحواف ذهبية تماماً مثل الغامق لتعطي البروز */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* ظل لتعزيز البروز */
+            background: var(--light); /* البوكس لون الخلفية */
+            color: var(--main);       /* الأيقونة خضراء غامقة */
+            border: 2px solid var(--gold); /* الحواف ذهبية #E1A93E للبروز */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
-        .light .website { background: var(--light); border: 2.5px solid var(--gold); }
-        
+        .light .website { background: var(--light); border: 2px solid var(--gold); }
         .light .iconBtn::before, .light .ctrl::before { background: var(--main); color: var(--light); }
-        
         .light .ctrl { color: white; }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; }
@@ -200,14 +203,14 @@
 
         <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" data-ar="فيسبوك" data-en="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a class="iconBtn" href="https://www.instagram.com/nadimfoundation" data-ar="إنستجرام" data-en="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" data-ar="يوتيوب" data-en="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" data-ar=" يوتيوب" data-en="YouTube"><i class="fa-brands fa-youtube"></i></a>
         <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/" data-ar="لينكد إن" data-en="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
         <a class="iconBtn" href="mailto:info@nadimfoundation.org" data-ar="بريد إلكتروني" data-en="Email"><i class="fa-solid fa-envelope"></i></a>
         <a class="iconBtn" href="https://wa.me/201227799564" data-ar="واتساب" data-en="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
 
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.144445657444!2d31.2584102!3d30.0326442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840938f808f93%3A0xcb04f1388439396e!2sNadim%20Foundation!5e0!3m2!1sen!2seg!4v1712910000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.6625442525795!2d31.2415!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzM5LjgiTiAzMcKwMTQnMjkuNCJF!5e0!3m2!1sen!2seg!4v1618220000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
