@@ -46,7 +46,7 @@
             direction: ltr !important; 
         }
 
-        /* ICON BUTTONS (Default / Dark Mode) */
+        /* ICON BUTTONS (Dark Mode Default) */
         .iconBtn {
             position: relative;
             display: flex;
@@ -57,10 +57,10 @@
             border-radius: 26px;
             font-size: 35px;
             text-decoration: none;
-            background: var(--main); /* البوكس نفس لون الخلفية في الدارك */
+            background: var(--main);
             color: var(--light);
-            border: 2px solid rgba(234, 232, 216, 0.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--gold); /* حواف ذهبية صريحة للبروز */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             -webkit-tap-highlight-color: transparent;
             z-index: 1;
@@ -70,21 +70,22 @@
         .iconBtn::before, .ctrl::before {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 120%;
+            bottom: 125%;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
-            background: var(--light);
-            color: var(--main);
-            padding: 7px 14px;
-            border-radius: 10px;
-            font-size: 13px;
+            background: var(--main);
+            color: var(--light);
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-size: 14px;
             font-weight: 700;
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
             transition: 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             pointer-events: none;
+            z-index: 1000;
         }
 
         .iconBtn:hover::before, .ctrl:hover::before {
@@ -98,8 +99,8 @@
                 transform: scale(1.12) translateY(-10px);
                 color: var(--gold) !important;
                 border-color: var(--gold);
-                background: rgba(234, 232, 216, 0.1);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+                background: rgba(234, 232, 216, 0.05);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
                 z-index: 10;
             }
         }
@@ -111,13 +112,15 @@
             grid-column: 1 / span 3;
             width: 100%;
             height: 85px;
+            background: var(--main);
+            color: var(--light);
             font-size: 18px;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .siteLogo { width: 38px; height: 38px; flex-shrink: 0; }
 
@@ -129,8 +132,8 @@
             height: 170px;
             border-radius: 28px;
             overflow: hidden;
-            border: 3px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 3.5px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         .map iframe { width: 100%; height: 100%; border: 0; }
 
@@ -144,10 +147,10 @@
             border-radius: 50px;
             display: flex;
             gap: 25px;
-            background: rgba(10, 30, 35, 0.95);
+            background: rgba(10, 30, 35, 0.96);
             backdrop-filter: blur(15px);
             border: 1px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             z-index: 9999;
             direction: ltr !important; 
         }
@@ -160,20 +163,20 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* LIGHT MODE (التعديل المطلوب) */
+        /* LIGHT MODE (المطلوب: بروز ذهبي ونفس هيبة الغامق) */
         .light { background: var(--light); color: var(--main); }
         
         .light .iconBtn { 
-            background: var(--light); /* البوكس نفس لون الخلفية في اللايت */
-            color: var(--main);       /* الأيقونة باللون الأخضر الغامق */
-            border: 2px solid rgba(6, 68, 76, 0.1); 
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            background: var(--light); /* البوكس نفس لون الخلفية الكريمي */
+            color: var(--main);       /* الأيقونة داخلية خضراء غامقة */
+            border: 2px solid var(--gold); /* الحواف ذهبية تماماً مثل الغامق لتعطي البروز */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* ظل لتعزيز البروز */
         }
         
-        /* بالونة الكلام في اللايت مود */
+        .light .website { background: var(--light); border: 2.5px solid var(--gold); }
+        
         .light .iconBtn::before, .light .ctrl::before { background: var(--main); color: var(--light); }
         
-        /* الحفاظ على ألوان شريط التحكم السفلي كما طلبت */
         .light .ctrl { color: white; }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; }
