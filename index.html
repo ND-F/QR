@@ -1,359 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nadim Foundation - مؤسسة نديم</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" type="image/svg+xml" href="images/nadim-icon.svg">
+    <link rel="apple-touch-icon" href="images/nadim-icon.svg">
 
-<title>Nadim Foundation - مؤسسة نديم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root { 
+            --main: #06444C; 
+            --light: #EAE8D8; 
+            --gold: #E1A93E; 
+        }
 
-<style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
 
-/* PAGE */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            text-align: center;
+            background: var(--main);
+            color: var(--light);
+            padding-bottom: calc(120px + env(safe-area-inset-bottom));
+            transition: background 0.4s, color 0.4s;
+            direction: ltr; /* للحفاظ على ترتيب أيقونات السوشيال ميديا */
+        }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  /* Fix: avoid body animation that breaks Safari */
-}
+        .pageWrapper {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: pageIn 0.6s forwards;
+        }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  text-align: center;
-  background: #0f2024;
-  color: #e9f6f7;
-  /* Fix: use padding-bottom with env() for iPhone safe area */
-  padding-bottom: calc(120px + env(safe-area-inset-bottom));
-  transition: background 0.4s, color 0.4s;
-}
+        @keyframes pageIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-/* Fix: animate a wrapper div instead of body */
-.pageWrapper {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: pageIn 0.6s forwards;
-}
+        .light {
+            background: var(--light) !important;
+            color: var(--main) !important;
+        }
 
-@keyframes pageIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+        /* HEADER */
+        .logoStrip {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
-.light {
-  background: #f4f7f8;
-  color: #0c4f57;
-}
+        .logo {
+            width: 150px;
+            display: block;
+            margin: 0 auto;
+        }
 
-/* HEADER */
+        /* GRID */
+        .iconGrid {
+            width: 90%;
+            max-width: 420px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            justify-items: center;
+        }
 
-.logoStrip {
-  background: #e9f6f7;
-  padding: 22px;
-  border-radius: 0 0 40px 40px;
-}
+        /* ICON BUTTON */
+        .iconBtn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 85px;
+            height: 85px;
+            border-radius: 24px;
+            font-size: 32px;
+            color: var(--light);
+            text-decoration: none;
+            background: rgba(234, 232, 216, 0.1); /* كريمي شفاف */
+            border: 1px solid rgba(234, 232, 216, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+        }
 
-.logo {
-  width: 140px;
-  display: block;
-  margin: 0 auto;
-}
+        /* WEBSITE BUTTON - التميز الذهبي */
+        .website {
+            grid-column: 1 / span 3;
+            width: 100%;
+            height: 85px;
+            background: var(--gold) !important;
+            color: var(--main) !important;
+            font-size: 17px;
+            font-weight: 700;
+            gap: 15px;
+            border: none;
+        }
 
-/* GRID */
+        .siteLogo {
+            width: 38px;
+            height: 38px;
+        }
 
-.iconGrid {
-  width: 90%;
-  max-width: 420px;
-  margin: 40px auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  justify-items: center;
-}
+        /* HOVER EFFECTS */
+        @media (hover: hover) {
+            .iconBtn:hover {
+                transform: translateY(-5px);
+                background: rgba(234, 232, 216, 0.2);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+                color: var(--gold);
+            }
+            .website:hover {
+                filter: brightness(1.1);
+                color: var(--main);
+            }
+        }
 
-/* ICON BUTTON */
+        /* LIGHT MODE ADAPTATION */
+        .light .iconBtn {
+            background: white;
+            color: var(--main);
+            border: 1px solid rgba(6, 68, 76, 0.1);
+        }
+        .light .logoStrip {
+            border-bottom: 1px solid rgba(6, 68, 76, 0.1);
+        }
 
-.iconBtn {
-  position: relative;
-  overflow: hidden;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  border-radius: 22px;
-  font-size: 30px;
-  color: #28c3cc;
-  text-decoration: none;
-  background: rgba(255, 255, 255, .08);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
-  /* Fix: use -webkit-tap-highlight-color for mobile */
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.25s, box-shadow 0.25s;
-  /* Fix: enable GPU layer for smoother animation on Safari */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
-}
+        /* MAP */
+        .map {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 420px;
+            height: 180px;
+            border-radius: 25px;
+            overflow: hidden;
+            border: 2px solid rgba(225, 169, 62, 0.3);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
 
-/* WEBSITE BUTTON */
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(0.3) contrast(1.1);
+        }
 
-.website {
-  grid-column: 1 / span 3;
-  width: 100%;
-  height: 80px;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  gap: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  box-sizing: border-box;
-}
+        /* FLOATING BAR (Glassmorphism) */
+        .floatingBar {
+            position: fixed;
+            bottom: calc(25px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 30px;
+            border-radius: 50px;
+            display: flex;
+            gap: 25px;
+            background: rgba(10, 30, 35, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(225, 169, 62, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+        }
 
-.siteLogo {
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-}
+        .ctrl {
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* HOVER — desktop only to avoid sticky hover on mobile */
-@media (hover: hover) {
-  .iconBtn:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow:
-      0 0 14px #1fa3ad,
-      0 14px 28px rgba(0, 0, 0, .35);
-  }
-}
+        .ctrl:active { transform: scale(0.8); }
 
-/* BOUNCE */
-.iconBtn:active {
-  animation: bounce 0.3s;
-}
+        .footer {
+            margin: 40px;
+            opacity: .5;
+            font-size: 13px;
+            font-weight: 400;
+        }
 
-@keyframes bounce {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.2); }
-  70%  { transform: scale(.92); }
-  100% { transform: scale(1); }
-}
-
-/* RIPPLE */
-.iconBtn::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #1fa3ad;
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(1);
-  pointer-events: none;
-}
-
-.iconBtn:active::after {
-  animation: ripple 0.5s;
-}
-
-@keyframes ripple {
-  0%   { opacity: .6; transform: scale(1); }
-  100% { opacity: 0;  transform: scale(20); }
-}
-
-/* LIGHT MODE */
-
-.light .iconBtn {
-  background: rgba(255, 255, 255, .85);
-  color: #0c4f57;
-}
-
-/* MAP */
-
-.map {
-  margin: 30px auto;
-  width: 90%;
-  max-width: 420px;
-  height: 150px;
-  border-radius: 18px;
-  overflow: hidden;
-  /* Fix: Safari iframe overflow clip */
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-}
-
-.map iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-
-/* FLOAT BAR */
-
-.floatingBar {
-  position: fixed;
-  bottom: 18px;
-  /* Fix: account for iPhone home indicator */
-  bottom: calc(18px + env(safe-area-inset-bottom));
-  left: 50%;
-  /* Fix: use margin trick instead of transform for Safari fixed elements */
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  border-radius: 40px;
-  display: -webkit-flex;
-  display: flex;
-  gap: 18px;
-  background: rgba(255, 255, 255, .2);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
-  /* Fix: force compositing layer so it doesn't disappear on scroll in Safari */
-  -webkit-transform: translateX(-50%) translateZ(0);
-  transform: translateX(-50%) translateZ(0);
-  z-index: 999;
-}
-
-.ctrl {
-  font-size: 22px;
-  cursor: pointer;
-  transition: transform 0.25s;
-  /* Fix: remove tap delay on Safari */
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.ctrl:active {
-  transform: scale(.85);
-}
-
-/* FOOTER */
-
-.footer {
-  margin: 30px;
-  opacity: .6;
-  font-size: 14px;
-}
-
-</style>
+    </style>
 </head>
 
 <body>
 
-<!-- Fix: animate wrapper, not body -->
 <div class="pageWrapper">
 
-  <div class="logoStrip">
-    <img class="logo"
-      loading="lazy"
-      src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.png"
-      alt="Nadim Foundation Logo">
-  </div>
+    <header class="logoStrip">
+        <img class="logo" src="images/logo-nadim.png" alt="Nadim Foundation Logo">
+    </header>
 
-  <div class="iconGrid">
+    <div class="iconGrid">
 
-    <a class="iconBtn website"
-      href="https://www.nadimfoundation.org/">
-      <img class="siteLogo"
-        loading="lazy"
-        src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg"
-        alt="Nadim Icon">
-      <span>Official Website - الموقع الرسمي</span>
-    </a>
+        <a class="iconBtn website" href="https://www.nadimfoundation.org/">
+            <img class="siteLogo" src="images/nadim-icon.svg" alt="Nadim Icon">
+            <span>الموقع الرسمي - Official Website</span>
+        </a>
 
-    <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" aria-label="Facebook">
-      <i class="fa-brands fa-facebook-f"></i>
-    </a>
+        <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
 
-    <a class="iconBtn" href="https://www.instagram.com/nadimfoundation" aria-label="Instagram">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
+        <a class="iconBtn" href="https://www.instagram.com/nadimfoundation" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
 
-    <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" aria-label="YouTube">
-      <i class="fa-brands fa-youtube"></i>
-    </a>
+        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" aria-label="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
 
-    <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/" aria-label="LinkedIn">
-      <i class="fa-brands fa-linkedin-in"></i>
-    </a>
+        <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+        </a>
 
-    <a class="iconBtn" href="mailto:info@nadimfoundation.org" aria-label="Email">
-      <i class="fa-solid fa-envelope"></i>
-    </a>
+        <a class="iconBtn" href="mailto:info@nadimfoundation.org" aria-label="Email">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
 
-    <a class="iconBtn" href="https://wa.me/201227799564" aria-label="WhatsApp">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
+        <a class="iconBtn" href="https://wa.me/201227799564" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
 
-  </div>
+    </div>
 
-  <div class="map">
-    <iframe
-      loading="lazy"
-      src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      title="Cairo Map">
-    </iframe>
-  </div>
+    <div class="map">
+        <iframe 
+            src="https://maps.google.com/maps?q=cairo&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+            title="Location">
+        </iframe>
+    </div>
 
-  <div class="footer">
-    Nadim Foundation - مؤسسة نديم © ®
-  </div>
+    <div class="footer">
+        Nadim Foundation - مؤسسة نديم © ®
+    </div>
 
-</div><!-- end pageWrapper -->
+</div>
 
 <div class="floatingBar">
-  <div class="ctrl" onclick="share()" role="button" aria-label="Share">🔗</div>
-  <div class="ctrl" id="themeBtn" onclick="toggleTheme()" role="button" aria-label="Toggle theme">☀️</div>
+    <div class="ctrl" onclick="share()">🔗</div>
+    <div class="ctrl" id="themeBtn" onclick="toggleTheme()">☀️</div>
 </div>
 
 <script>
+    const body = document.body;
+    const btn = document.getElementById("themeBtn");
 
-  const body = document.body;
-  const btn  = document.getElementById("themeBtn");
+    // تهيئة الثيم
+    (function initTheme() {
+        const saved = localStorage.getItem("theme");
+        if (saved === "light") {
+            body.classList.add("light");
+            btn.innerHTML = "🌙";
+        }
+    })();
 
-  // Theme init
-  (function initTheme() {
-    const saved = localStorage.getItem("theme");
-    const preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    const isLight = saved ? saved === "light" : preferLight;
-    if (isLight) {
-      body.classList.add("light");
-      btn.innerHTML = "🌙";
-    } else {
-      btn.innerHTML = "☀️";
+    function toggleTheme() {
+        body.classList.toggle("light");
+        const isLight = body.classList.contains("light");
+        btn.innerHTML = isLight ? "🌙" : "☀️";
+        localStorage.setItem("theme", isLight ? "light" : "dark");
     }
-  })();
 
-  function toggleTheme() {
-    body.classList.toggle("light");
-    const isLight = body.classList.contains("light");
-    btn.innerHTML  = isLight ? "🌙" : "☀️";
-    localStorage.setItem("theme", isLight ? "light" : "dark");
-  }
-
-  function share() {
-    if (navigator.share) {
-      navigator.share({
-        title: "Nadim Foundation - مؤسسة نديم",
-        url: window.location.href
-      }).catch(function(){});
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard && navigator.clipboard.writeText(window.location.href).then(function() {
-        alert("Link copied! - تم نسخ الرابط");
-      });
+    function share() {
+        if (navigator.share) {
+            navigator.share({
+                title: "Nadim Foundation - مؤسسة نديم",
+                url: window.location.href
+            }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("تم نسخ الرابط بنجاح - Link Copied!");
+            });
+        }
     }
-  }
-
 </script>
 
 </body>
