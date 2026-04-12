@@ -26,7 +26,7 @@
 
         /* HEADER */
         .logoStrip {
-            background: var(--light); /* كريمي كخلفية افتراضية */
+            background: var(--light);
             padding: 30px 20px;
             border-radius: 0 0 50px 50px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
@@ -57,8 +57,8 @@
             border-radius: 26px;
             font-size: 35px;
             text-decoration: none;
-            background: var(--main); /* كحلي نديم خلفية */
-            color: var(--light); /* رمز كريمي */
+            background: var(--main);
+            color: var(--light);
             border: 2px solid rgba(234, 232, 216, 0.2);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -66,12 +66,38 @@
             z-index: 1;
         }
 
-        /* Pop-out Animation & Gold interaction on Hover/Active (الموحدة) */
+        /* Tooltip (بالونة الكلام) */
+        .iconBtn::before, .ctrl::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--light);
+            color: var(--main);
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        .iconBtn:hover::before, .ctrl:hover::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
         @media (hover: hover) {
             .iconBtn:hover, .ctrl:hover {
                 transform: scale(1.12) translateY(-10px);
-                color: var(--gold); /* الرمز ذهبي عند الـ hover */
-                border-color: var(--gold); /* الحافة ذهبية عند الـ hover */
+                color: var(--gold);
+                border-color: var(--gold);
                 background: rgba(234, 232, 216, 0.1);
                 box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
                 z-index: 10;
@@ -80,27 +106,37 @@
 
         .iconBtn:active, .ctrl:active { transform: scale(0.95); }
 
-        /* Tooltip (بالونة الكلام) */
-        ...
-
         /* WEBSITE BUTTON */
         .website {
             grid-column: 1 / span 3;
             width: 100%;
             height: 85px;
-            background: var(--main); /* كحلي نديم افتراضي ليتوافق مع بقية الأزرار */
+            background: var(--main);
             color: var(--light);
             font-size: 18px;
             font-weight: 700;
-            gap: 12px;
+            display: flex; /* لضمان محاذاة اللوجو والنص بجانب بعضهما */
+            align-items: center;
+            justify-content: center;
+            gap: 15px; /* مسافة بين اللوجو والنص */
             margin-bottom: 10px;
         }
-        ...
+        .siteLogo { width: 38px; height: 38px; flex-shrink: 0; }
 
         /* MAP */
-        ...
+        .map {
+            margin: 50px auto;
+            width: 90%;
+            max-width: 450px;
+            height: 170px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .map iframe { width: 100%; height: 100%; border: 0; }
 
-        /* FLOAT BAR (تثبيت الألوان) */
+        /* FLOAT BAR */
         .floatingBar {
             position: fixed;
             bottom: calc(25px + env(safe-area-inset-bottom));
@@ -110,7 +146,7 @@
             border-radius: 50px;
             display: flex;
             gap: 25px;
-            background: rgba(10, 30, 35, 0.95); /* تثبيت المظهر الزجاجي الداكن */
+            background: rgba(10, 30, 35, 0.95);
             backdrop-filter: blur(15px);
             border: 1px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -126,27 +162,15 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* LIGHT MODE ADAPTATION (إزالة معظم تعديلات الثيم الفاتح) */
+        /* LIGHT MODE */
         .light { background: var(--light); color: var(--main); }
-        
-        /* جعل الأيقونات في الثيم الفاتح تأخذ خلفية داكنة (مثل كحلي نديم #06444C) */
-        .light .iconBtn { 
-            background: var(--main); 
-            color: var(--light); /* رمز كريمي على خلفية كحلي نديم */
-            border: 2px solid rgba(234, 232, 216, 0.2); 
-        }
-        
-        /* جعل الـ Tooltips في الثيم الفاتح كريمية على كحلية نديم */
+        .light .iconBtn { background: var(--main); color: var(--light); border: 2px solid rgba(234, 232, 216, 0.2); }
         .light .iconBtn::before, .light .ctrl::before { background: var(--main); color: var(--light); }
-        
-        /* إلغاء تعديلات صندوق التحكم العلوي والسفلي في الثيم الفاتح */
-        /* .light .logoStrip {} */
-        /* .light .floatingBar {} */
-        
-        /* جعل رموز شريط التحكم كريمية على خلفية زجاجية داكنة */
         .light .ctrl { color: white; }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; }
+        .lang-ar { direction: rtl; }
+        .lang-en { direction: ltr; }
     </style>
 </head>
 
@@ -160,13 +184,20 @@
     <div class="iconGrid">
         <a class="iconBtn website" href="https://www.nadimfoundation.org/" id="webBtn" data-ar="الموقع الرئيسي" data-en="Official Website">
             <img class="siteLogo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg" alt="Icon">
-            <span id="webText">الموقع الرئيسي - Official Website</span>
+            <span id="webText">الموقع الرئيسي</span>
         </a>
 
-        ...
+        <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" data-ar="فيسبوك" data-en="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="iconBtn" href="https://www.instagram.com/nadimfoundation" data-ar="إنستجرام" data-en="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" data-ar="يوتيوب" data-en="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/" data-ar="لينكد إن" data-en="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a class="iconBtn" href="mailto:info@nadimfoundation.org" data-ar="بريد إلكتروني" data-en="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a class="iconBtn" href="https://wa.me/201227799564" data-ar="واتساب" data-en="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
 
-    ...
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.144445657444!2d31.2584102!3d30.0326442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840938f808f93%3A0xcb04f1388439396e!2sNadim%20Foundation!5e0!3m2!1sen!2seg!4v1712910000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+    </div>
 
     <div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
 </div>
@@ -182,11 +213,8 @@
     const themeBtn = document.getElementById("themeBtn");
     const webText = document.getElementById("webText");
     
-    // 1. اكتشاف اللغة المفضلة للجهاز
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
-
-    // 2. اكتشاف ثيم الجهاز
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     function updateLabels() {
@@ -196,6 +224,7 @@
         });
         
         webText.innerHTML = currentLang === 'ar' ? "الموقع الرئيسي" : "Official Website";
+        body.className = currentLang === 'ar' ? 'lang-ar' : 'lang-en';
         
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
