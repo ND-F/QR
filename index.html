@@ -34,7 +34,7 @@
         }
         .logo { width: 160px; display: block; margin: 0 auto; }
 
-        /* GRID */
+        /* GRID - ثبتنا الاتجاه هنا عشان الذاكرة العضلية */
         .iconGrid {
             width: 90%;
             max-width: 450px;
@@ -43,6 +43,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             justify-items: center;
+            direction: ltr !important; /* تثبيت الأيقونات في مكانها مهما كانت اللغة */
         }
 
         /* ICON BUTTONS */
@@ -65,25 +66,23 @@
             z-index: 1;
         }
 
-        /* Pop-out Animation on Hover */
+        /* Pop-out Animation */
         @media (hover: hover) {
-            .iconBtn:hover {
+            .iconBtn:hover, .ctrl:hover {
                 transform: scale(1.12) translateY(-10px);
-                background: rgba(234, 232, 216, 0.1);
                 border-color: var(--gold);
                 color: var(--gold);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
                 z-index: 10;
             }
         }
 
-        .iconBtn:active { transform: scale(0.95); }
+        .iconBtn:active, .ctrl:active { transform: scale(0.95); }
 
         /* Tooltip (بالونة الكلام) */
-        .iconBtn::before {
+        .iconBtn::before, .ctrl::before {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 115%;
+            bottom: 120%;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: var(--light);
@@ -100,18 +99,18 @@
             pointer-events: none;
         }
 
-        .iconBtn:hover::before {
+        .iconBtn:hover::before, .ctrl:hover::before {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
 
-        /* WEBSITE BUTTON (تم تعديله ليتناسب مع بقية الأزرار) */
+        /* WEBSITE BUTTON */
         .website {
             grid-column: 1 / span 3;
             width: 100%;
             height: 85px;
-            background: var(--main); /* كحلي بدل الذهبي */
+            background: var(--main);
             color: var(--light);
             font-size: 18px;
             font-weight: 700;
@@ -133,7 +132,7 @@
         }
         .map iframe { width: 100%; height: 100%; border: 0; }
 
-        /* FLOAT BAR */
+        /* FLOAT BAR - تثبيت الترتيب هنا أيضاً */
         .floatingBar {
             position: fixed;
             bottom: calc(25px + env(safe-area-inset-bottom));
@@ -142,29 +141,35 @@
             padding: 12px 30px;
             border-radius: 50px;
             display: flex;
-            gap: 25px;
-            background: rgba(10, 30, 35, 0.9);
+            gap: 30px;
+            background: rgba(10, 30, 35, 0.95);
             backdrop-filter: blur(15px);
             border: 1px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             z-index: 9999;
+            direction: ltr !important; 
         }
-        .ctrl { font-size: 24px; cursor: pointer; color: white; transition: 0.2s; }
+        .ctrl { 
+            position: relative;
+            font-size: 24px; 
+            cursor: pointer; 
+            color: white; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-tap-highlight-color: transparent;
+        }
 
         /* LIGHT MODE */
         .light { background: var(--light); color: var(--main); }
         .light .iconBtn { background: white; color: var(--main); border-color: rgba(6, 68, 76, 0.1); }
-        .light .iconBtn::before { background: var(--main); color: var(--light); }
+        .light .iconBtn::before, .light .ctrl::before { background: var(--main); color: var(--light); }
+        .light .floatingBar { background: rgba(255, 255, 255, 0.9); border-color: var(--main); }
+        .light .ctrl { color: var(--main); }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; }
-        
-        /* Language directions */
-        .lang-ar { direction: rtl; }
-        .lang-en { direction: ltr; }
     </style>
 </head>
 
-<body class="lang-ar">
+<body>
 
 <div class="pageWrapper">
     <header class="logoStrip">
@@ -186,16 +191,16 @@
     </div>
 
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.303387878!2d31.2505!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQwLjAiTiAzMcKwMTUnMDEuOCJF!5e0!3m2!1sen!2seg!4v1620000000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.212727653606!2d31.2581691!3d30.0307996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f707f43377f%3A0xc3f6079d3907e3f!2sNadim%20Foundation!5e0!3m2!1sen!2seg!4v1712880000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
 </div>
 
 <div class="floatingBar">
-    <div class="ctrl" id="shareBtn" onclick="share()">🔗</div>
-    <div class="ctrl" id="themeBtn" onclick="toggleTheme()">☀️</div>
-    <div class="ctrl" id="langBtn" onclick="toggleLang()">🌐</div>
+    <div class="ctrl" id="shareBtn" onclick="share()" data-ar="مشاركة" data-en="Share">🔗</div>
+    <div class="ctrl" id="themeBtn" onclick="toggleTheme()" data-ar="المظهر" data-en="Theme">☀️</div>
+    <div class="ctrl" id="langBtn" onclick="toggleLang()" data-ar="اللغة" data-en="Language">🌐</div>
 </div>
 
 <script>
@@ -203,21 +208,17 @@
     const themeBtn = document.getElementById("themeBtn");
     const webText = document.getElementById("webText");
     
-    // 1. اكتشاف اللغة المفضلة للجهاز
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
-
-    // 2. اكتشاف ثيم الجهاز
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     function updateLabels() {
-        document.querySelectorAll('.iconGrid .iconBtn').forEach(btn => {
-            const label = btn.getAttribute(`data-${currentLang}`);
-            btn.setAttribute('data-tooltip', label || '');
+        document.querySelectorAll('[data-ar]').forEach(el => {
+            const label = el.getAttribute(`data-${currentLang}`);
+            el.setAttribute('data-tooltip', label || '');
         });
         
         webText.innerHTML = currentLang === 'ar' ? "الموقع الرئيسي" : "Official Website";
-        body.className = currentLang === 'ar' ? 'lang-ar' : 'lang-en';
         
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
