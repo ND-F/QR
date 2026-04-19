@@ -50,52 +50,59 @@
             direction: ltr !important; 
         }
             
-              /* ICON BUTTONS */
-            .iconBtn {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 90px; 
-                height: 90px;
-                border-radius: 26px;
-                font-size: 35px;
-                text-decoration: none;
-                background: var(--main);
-                color: var(--light);
-                border: 2px solid transparent;
-                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-                -webkit-tap-highlight-color: transparent;
-                z-index: 1;
+/* ICON BUTTONS */
+        .iconBtn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px; 
+            height: 90px;
+            border-radius: 26px;
+            font-size: 35px;
+            text-decoration: none;
+            background: var(--main);
+            color: var(--light);
+            border: 2px solid transparent;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent;
+            z-index: 1;
             
-                /* إجبار المتصفح على استخدام كارت الشاشة لمنع الهزة */
-                backface-visibility: hidden;
-                will-change: transform;
-                transform: translateZ(0);
-                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-            }
-            
-            /* التفاعل عند الماوس (Hover) */
-            @media (hover: hover) {
-                .iconBtn:hover {
-                    /* ضفنا translateZ(0) هنا عشان نحافظ على النعومة وماتصلش الرعشة */
-                    transform: scale(1.12) translateY(-10px) translateZ(0);
-                    color: var(--gold) !important;
-                    border-color: var(--gold);
-                    background: rgba(234, 232, 216, 0.05);
-                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-                    z-index: 10;
-                }
-            }
-            
-            /* التفاعل عند اللمس (Mobile Active) */
-            .iconBtn:active {
-                /* وضفناها هنا كمان للموبايل */
-                transform: scale(1.1) translateY(-5px) translateZ(0);
-                border-color: var(--gold);
+            /* تنعيم الزرار نفسه */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* السر هنا: تنعيم المحتوى الداخلي للزرار (الأيقونات والصور والنصوص) لمنع رعشة التكبير */
+        .iconBtn i, .iconBtn img, .iconBtn span {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        /* التفاعل عند الماوس (Hover) */
+        @media (hover: hover) {
+            .iconBtn:hover {
+                /* ترتيب translateY قبل scale بيقلل المشاكل في بعض المتصفحات */
+                transform: translateY(-10px) scale(1.12);
                 color: var(--gold) !important;
-                transition: all 0.1s;
+                border-color: var(--gold);
+                background: rgba(234, 232, 216, 0.05);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+                z-index: 10;
             }
+        }
+
+        /* التفاعل عند اللمس (Mobile Active) */
+        .iconBtn:active {
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--gold);
+            color: var(--gold) !important;
+            transition: all 0.1s;
+        }
             
             /* Tooltip */
             .iconBtn::before, .ctrl::before {
