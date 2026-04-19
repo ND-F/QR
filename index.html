@@ -49,75 +49,81 @@
             justify-items: center;
             direction: ltr !important; 
         }
-
-        /* ICON BUTTONS */
-        .iconBtn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 90px; 
-            height: 90px;
-            border-radius: 26px;
-            font-size: 35px;
-            text-decoration: none;
-            background: var(--main); /* لون الخلفية الافتراضي للدارك */
-            color: var(--light);
-            border: 2px solid transparent; /* الحافة مخفية افتراضياً */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            -webkit-tap-highlight-color: transparent;
-            z-index: 1;
-        }
-
-        /* التفاعل عند الماوس (Hover) */
-        @media (hover: hover) {
-            .iconBtn:hover {
-                transform: scale(1.12) translateY(-10px);
-                color: var(--gold) !important;
-                border-color: var(--gold); /* تظهر الحافة الذهبية هنا فقط */
-                background: rgba(234, 232, 216, 0.05);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-                z-index: 10;
+            
+            /* ICON BUTTONS */
+            .iconBtn {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 90px; 
+                height: 90px;
+                border-radius: 26px;
+                font-size: 35px;
+                text-decoration: none;
+                background: var(--main);
+                color: var(--light);
+                border: 2px solid transparent;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+                -webkit-tap-highlight-color: transparent;
+                z-index: 1;
+            
+                /* --- التعديلات الجديدة لمنع الهزة وتنعيم الحركة --- */
+                backface-visibility: hidden;
+                transform: translateZ(0);
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             }
-        }
+            
+            /* التفاعل عند الماوس (Hover) */
+            @media (hover: hover) {
+                .iconBtn:hover {
+                    transform: scale(1.12) translateY(-10px);
+                    color: var(--gold) !important;
+                    border-color: var(--gold);
+                    background: rgba(234, 232, 216, 0.05);
+                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+                    z-index: 10;
+                }
+            }
+            
+            /* التفاعل عند اللمس (Mobile Active) */
+            .iconBtn:active {
+                transform: scale(1.1) translateY(-5px);
+                border-color: var(--gold);
+                color: var(--gold) !important;
+                transition: all 0.1s;
+            }
+            
+            /* Tooltip */
+            .iconBtn::before, .ctrl::before {
+                /* باقي كود التولتيب بتاعك زي ما هو */
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 125%;
+                left: 50%;
+                transform: translateX(-50%) translateY(10px);
+                background: var(--main);
+                color: var(--light);
+                padding: 8px 15px;
+                border-radius: 12px;
+                font-size: 14px;
+                font-weight: 700;
+                white-space: nowrap;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s ease;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+                pointer-events: none;
+                z-index: 1000;
+            }
+            
+            .iconBtn:hover::before, .ctrl:hover::before {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+            }
 
-        /* التفاعل عند اللمس (Mobile Active) */
-        .iconBtn:active {
-            transform: scale(1.1) translateY(-5px);
-            border-color: var(--gold); /* تظهر الحافة عند اللمس في الموبايل */
-            color: var(--gold) !important;
-            transition: all 0.1s;
-        }
-
-        /* Tooltip */
-        .iconBtn::before, .ctrl::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: var(--main);
-            color: var(--light);
-            padding: 8px 15px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .iconBtn:hover::before, .ctrl:hover::before {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
+        
         /* WEBSITE BUTTON */
         .website {
             grid-column: 1 / span 3;
