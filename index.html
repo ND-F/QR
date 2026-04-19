@@ -50,7 +50,7 @@
             direction: ltr !important; 
         }
             
-            /* ICON BUTTONS */
+              /* ICON BUTTONS */
             .iconBtn {
                 position: relative;
                 display: flex;
@@ -68,8 +68,9 @@
                 -webkit-tap-highlight-color: transparent;
                 z-index: 1;
             
-                /* --- التعديلات الجديدة لمنع الهزة وتنعيم الحركة --- */
+                /* إجبار المتصفح على استخدام كارت الشاشة لمنع الهزة */
                 backface-visibility: hidden;
+                will-change: transform;
                 transform: translateZ(0);
                 transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
             }
@@ -77,7 +78,8 @@
             /* التفاعل عند الماوس (Hover) */
             @media (hover: hover) {
                 .iconBtn:hover {
-                    transform: scale(1.12) translateY(-10px);
+                    /* ضفنا translateZ(0) هنا عشان نحافظ على النعومة وماتصلش الرعشة */
+                    transform: scale(1.12) translateY(-10px) translateZ(0);
                     color: var(--gold) !important;
                     border-color: var(--gold);
                     background: rgba(234, 232, 216, 0.05);
@@ -88,7 +90,8 @@
             
             /* التفاعل عند اللمس (Mobile Active) */
             .iconBtn:active {
-                transform: scale(1.1) translateY(-5px);
+                /* وضفناها هنا كمان للموبايل */
+                transform: scale(1.1) translateY(-5px) translateZ(0);
                 border-color: var(--gold);
                 color: var(--gold) !important;
                 transition: all 0.1s;
@@ -96,12 +99,12 @@
             
             /* Tooltip */
             .iconBtn::before, .ctrl::before {
-                /* باقي كود التولتيب بتاعك زي ما هو */
                 content: attr(data-tooltip);
                 position: absolute;
                 bottom: 125%;
                 left: 50%;
-                transform: translateX(-50%) translateY(10px);
+                /* ضفنا translateZ(0) للتولتيب عشان مايهزش وهو بيظهر */
+                transform: translateX(-50%) translateY(10px) translateZ(0);
                 background: var(--main);
                 color: var(--light);
                 padding: 8px 15px;
@@ -120,9 +123,8 @@
             .iconBtn:hover::before, .ctrl:hover::before {
                 opacity: 1;
                 visibility: visible;
-                transform: translateX(-50%) translateY(0);
+                transform: translateX(-50%) translateY(0) translateZ(0);
             }
-
         
         /* WEBSITE BUTTON */
         .website {
