@@ -219,9 +219,9 @@
     </header>
 
     <div class="iconGrid">
-        <a class="iconBtn website" href="https://www.nadimfoundation.org/" id="webBtn" data-ar="موقع مؤسسة نديم" data-en="Nadim Foundation Website">
+        <a class="iconBtn website" href="https://www.nadimfoundation.org/" id="webBtn" data-ar="الموقع الرئيسي" data-en="Official Website">
             <img class="siteLogo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/nadim-icon.svg" alt="Icon">
-            <span id="webText">Nadim Foundation Website</span>
+            <span id="webText">Official Website</span>
         </a>
 
         <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" data-ar="فيسبوك" data-en="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -260,7 +260,7 @@
             el.setAttribute('data-tooltip', label || '');
         });
         
-        webText.innerHTML = currentLang === 'ar' ? "الموقع الرئيسي" : "Official Website";
+        webText.innerHTML = currentLang === 'ar' ? "مؤسسة نديم" : "Nadim Foundation";
         
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
