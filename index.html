@@ -33,9 +33,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* تثبيت مساحة النص لمنع اهتزاز اللوجوهات عند تغيير اللغة */
         #webText {
-            width: 170px; /* مساحة ثابتة للنص تكفي الكلمتين */
+            width: 170px; 
             text-align: center;
+            display: inline-block;
         }
 
         /* HEADER */
@@ -60,7 +62,7 @@
             direction: ltr !important; 
         }
             
-/* ICON BUTTONS */
+        /* ICON BUTTONS */
         .iconBtn {
             position: relative;
             display: flex;
@@ -77,8 +79,6 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             -webkit-tap-highlight-color: transparent;
             z-index: 1;
-            
-            /* تنعيم الزرار نفسه */
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             transform: translate3d(0, 0, 0);
@@ -86,17 +86,15 @@
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
-        /* السر هنا: تنعيم المحتوى الداخلي للزرار (الأيقونات والصور والنصوص) لمنع رعشة التكبير */
-        .iconBtn i, .iconBtn img, .iconBtn span {
+        /* منع بكسلة الصور والرموز أثناء التكبير */
+        .iconBtn i, .iconBtn span {
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             transform: translateZ(0);
         }
 
-        /* التفاعل عند الماوس (Hover) */
         @media (hover: hover) {
             .iconBtn:hover {
-                /* ترتيب translateY قبل scale بيقلل المشاكل في بعض المتصفحات */
                 transform: translateY(-10px) scale(1.12);
                 color: var(--gold) !important;
                 border-color: var(--gold);
@@ -106,7 +104,6 @@
             }
         }
 
-        /* التفاعل عند اللمس (Mobile Active) */
         .iconBtn:active {
             transform: translateY(-5px) scale(1.1);
             border-color: var(--gold);
@@ -114,34 +111,32 @@
             transition: all 0.1s;
         }
             
-            /* Tooltip */
-            .iconBtn::before, .ctrl::before {
-                content: attr(data-tooltip);
-                position: absolute;
-                bottom: 125%;
-                left: 50%;
-                /* ضفنا translateZ(0) للتولتيب عشان مايهزش وهو بيظهر */
-                transform: translateX(-50%) translateY(10px) translateZ(0);
-                background: var(--main);
-                color: var(--light);
-                padding: 8px 15px;
-                border-radius: 12px;
-                font-size: 14px;
-                font-weight: 700;
-                white-space: nowrap;
-                opacity: 0;
-                visibility: hidden;
-                transition: 0.3s ease;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-                pointer-events: none;
-                z-index: 1000;
-            }
+        .iconBtn::before, .ctrl::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px) translateZ(0);
+            background: var(--main);
+            color: var(--light);
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 1000;
+        }
             
-            .iconBtn:hover::before, .ctrl:hover::before {
-                opacity: 1;
-                visibility: visible;
-                transform: translateX(-50%) translateY(0) translateZ(0);
-            }
+        .iconBtn:hover::before, .ctrl:hover::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) translateZ(0);
+        }
         
         /* WEBSITE BUTTON */
         .website {
@@ -160,13 +155,12 @@
         }
         .siteLogo { width: 38px; height: 38px; flex-shrink: 0; }
 
-        /* --- إعدادات اللوجو بناءً على الثيم --- */
+        /* التحكم في اللوجوهات بناءً على الثيم المختار من الزرار */
         .light-logo { display: none; }
         .dark-logo { display: block; }
         
         .light .light-logo { display: block; }
         .light .dark-logo { display: none; }
-        /* ------------------------------------- */
 
         /* MAP */
         .map {
@@ -210,14 +204,13 @@
         /* LIGHT MODE */
         .light { background: var(--light); color: var(--main); }
         .light .iconBtn { 
-            background: var(--light); /* البوكس مختفي في الخلفية الكريمي */
-            color: var(--main);       /* الرمز أخضر غامق */
+            background: var(--light);
+            color: var(--main);
             border-color: transparent;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
         }
         .light .website { background: var(--light); border: 2px solid transparent; }
         
-        /* تفعيل الحواف الذهبية في اللايت مود عند التفاعل */
         .light .iconBtn:hover, .light .iconBtn:active { 
             border-color: var(--gold); 
             background: var(--light); 
@@ -256,17 +249,17 @@
     </div>
 
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.0958367247654!2d31.019325891417864!3d30.09144151018166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585c79ad6b7e2d%3A0xe93b0ce5bf4942be!2sNADIM%20-%20Headquarters%20%26%20Factory!5e0!3m2!1sen!2sus!4v1776644304719!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3455.5181057410055!2d31.22915!3d29.993275!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14584736f875b28d%3A0xc3f9479b0ccb0d61!2sNadim%20Foundation!5e0!3m2!1sen!2seg!4v1710000000000!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <div class="footer">Nadim Foundation - مؤسسة نديم © ®</div>
-    </div>
+</div>
 
-    <div class="floatingBar">
+<div class="floatingBar">
     <div class="ctrl" id="shareBtn" onclick="share()" data-ar="مشاركة" data-en="Share">🔗</div>
     <div class="ctrl" id="themeBtn" onclick="toggleTheme()" data-ar="المظهر" data-en="Theme">☀️</div>
     <div class="ctrl" id="langBtn" onclick="toggleLang()" data-ar="اللغة" data-en="Language">🌐</div>
-    </div>
+</div>
 
 <script>
     const body = document.body;
@@ -275,23 +268,6 @@
     
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
-    
-    // دالة لتحديث أيقونة المتصفح بناءً على وضع النظام
-    function updateFavicon() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const favicon = document.getElementById('favicon');
-        const appleIcon = document.getElementById('appleIcon');
-        
-        const iconPath = isDark 
-            ? "https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg" 
-            : "https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg";
-            
-        favicon.href = iconPath;
-        appleIcon.href = iconPath;
-    }
-
-    // استماع لتغيير وضع نظام التشغيل لحظياً
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
 
     function updateLabels() {
         document.querySelectorAll('[data-ar]').forEach(el => {
@@ -335,7 +311,6 @@
     }
 
     window.onload = () => {
-        updateFavicon(); // تحديث الأيقونة عند التحميل
         const savedTheme = localStorage.getItem("theme");
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
