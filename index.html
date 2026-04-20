@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Nadim Foundation - مؤسسة نديم</title>
 
-    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg">
+    <meta name="theme-color" content="#06444C" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#EAE8D8" media="(prefers-color-scheme: light)">
+
+    <link id="favicon" rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg">
+    <link id="appleIcon" rel="apple-touch-icon" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg">
+    
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -270,7 +274,23 @@
     
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // دالة لتحديث أيقونة المتصفح بناءً على وضع النظام
+    function updateFavicon() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const favicon = document.getElementById('favicon');
+        const appleIcon = document.getElementById('appleIcon');
+        
+        const iconPath = isDark 
+            ? "https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg" 
+            : "https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg";
+            
+        favicon.href = iconPath;
+        appleIcon.href = iconPath;
+    }
+
+    // استماع لتغيير وضع نظام التشغيل لحظياً
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
 
     function updateLabels() {
         document.querySelectorAll('[data-ar]').forEach(el => {
@@ -281,6 +301,8 @@
         webText.innerHTML = currentLang === 'ar' ? "مـــؤســسـة نــديــم" : "Nadim Foundation";
         
         const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
         if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
             body.classList.add("light");
             themeBtn.innerHTML = "🌙";
@@ -312,7 +334,10 @@
     }
 
     window.onload = () => {
+        updateFavicon(); // تحديث الأيقونة عند التحميل
         const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
         if (savedTheme) {
             if (savedTheme === "light") body.classList.add("light");
         } else if (!prefersDark) {
