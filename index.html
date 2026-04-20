@@ -79,18 +79,8 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             -webkit-tap-highlight-color: transparent;
             z-index: 1;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
+            /* تم حذف أكواد الـ 3D هنا لضمان عدم بكسلة الـ SVG أثناء التكبير */
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-        }
-
-        /* منع بكسلة الصور والرموز أثناء التكبير - تم إزالة .iconBtn img لحل مشكلة بكسلة الـ SVG */
-        .iconBtn i, .iconBtn span {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            transform: translateZ(0);
         }
 
         @media (hover: hover) {
