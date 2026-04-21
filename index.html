@@ -33,9 +33,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* إضافة مسافة عشان المحتوى ما يستخباش ورا الهيدر */
+        /* تم تقليل المسافة العلوية لتناسب الارتفاع الجديد للهيدر */
         .pageWrapper {
-            padding-top: 140px; 
+            padding-top: 105px; 
         }
 
         /* تثبيت مساحة النص لمنع اهتزاز اللوجوهات عند تغيير اللغة */
@@ -45,7 +45,7 @@
             display: inline-block;
         }
 
-        /* HEADER - تم تحويله لـ Fixed */
+        /* HEADER - تم تقليل الارتفاع والدوران */
         .logoStrip {
             position: fixed;
             top: 0;
@@ -54,11 +54,12 @@
             box-sizing: border-box;
             z-index: 1000;
             background: var(--light);
-            padding: 30px 20px;
-            border-radius: 0 0 50px 50px;
+            padding: 12px 20px; /* تقليل المسافة من فوق وتحت */
+            border-radius: 0 0 35px 35px; /* تناسب أفضل مع الارتفاع الأقل */
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
         }
-        .logo { width: 250px; display: block; margin: 0 auto; }
+        /* تصغير اللوجو قليلا لتقليل الارتفاع العام */
+        .logo { width: 210px; display: block; margin: 0 auto; }
 
         /* GRID */
         .iconGrid {
