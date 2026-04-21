@@ -55,7 +55,6 @@
             padding: 12px 20px; 
             border-radius: 0 0 35px 35px; 
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-            /* إضافة Transition لنعومة الحركة */
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
@@ -63,33 +62,27 @@
             width: 250px; 
             display: block; 
             margin: 0 auto; 
-            /* إضافة Transition للوجو */
             transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* --- التصغير عند السكرول (جديد) --- */
         .logoStrip.shrink {
-            padding: 5px 20px; /* تقليل المسافات */
-            border-radius: 0 0 15px 15px; /* تقليل دوران الحواف */
-            background: rgba(234, 232, 216, 0.95); /* إضافة شفافية بسيطة جداً لو حابب، أو خليها لون عادي */
-            backdrop-filter: blur(10px); /* تأثير بلور للخلفية الشفافة */
+            padding: 5px 20px; 
+            border-radius: 0 0 15px 15px; 
+            background: rgba(234, 232, 216, 0.95); 
+            backdrop-filter: blur(10px); 
         }
         
-        /* تظبيط الشفافية في الدارك مود */
         body:not(.light) .logoStrip.shrink {
             background: rgba(234, 232, 216, 0.95);
         }
         
-        /* تظبيط الشفافية في اللايت مود */
         body.light .logoStrip.shrink {
             background: rgba(234, 232, 216, 0.95); 
         }
 
         .logoStrip.shrink .logo {
-            width: 150px; /* تصغير اللوجو بشكل ملحوظ */
+            width: 150px; 
         }
-        /* --------------------------------- */
-
 
         /* GRID */
         .iconGrid {
@@ -143,7 +136,7 @@
                 border-color: var(--gold);
                 background: rgba(234, 232, 216, 0.05);
                 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-                z-index: 10;
+                z-index: 1001; /* تم رفعه ليظهر فوق الهيدر الثابت */
             }
             
             .iconBtn:not(.newsletter):hover i,
@@ -160,6 +153,7 @@
             transform: translateY(-5px) scale(1.1);
             border-color: var(--gold);
             color: var(--gold) !important;
+            z-index: 1001; /* تم رفعه هنا أيضاً لضمان ظهوره عند اللمس */
             transition: all 0.1s;
         }
 
@@ -342,7 +336,7 @@
     const themeBtn = document.getElementById("themeBtn");
     const webText = document.getElementById("webText");
     const newsText = document.getElementById("newsText");
-    const mainHeader = document.getElementById("mainHeader"); // ربط الهيدر
+    const mainHeader = document.getElementById("mainHeader"); 
     
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
@@ -389,7 +383,6 @@
         }
     }
 
-    // --- مراقبة السكرول لتصغير الهيدر (جديد) ---
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
             mainHeader.classList.add("shrink");
@@ -397,7 +390,6 @@
             mainHeader.classList.remove("shrink");
         }
     }, { passive: true });
-    // ----------------------------------------
 
     window.onload = () => {
         const savedTheme = localStorage.getItem("theme");
