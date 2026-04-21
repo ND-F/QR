@@ -33,11 +33,15 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* تثبيت مساحة النص لمنع اهتزاز اللوجوهات عند تغيير اللغة */
+        /* تنسيق النصوص للأزرار الكبيرة لتناسب الحجم الجديد */
         #webText, #newsText {
-            width: 170px; 
+            width: auto;
+            max-width: 120px;
             text-align: center;
             display: inline-block;
+            font-size: 14px;
+            line-height: 1.2;
+            white-space: normal;
         }
 
         /* HEADER */
@@ -50,20 +54,21 @@
         }
         .logo { width: 250px; display: block; margin: 0 auto; }
 
-        /* GRID */
+        /* GRID - تم التعديل إلى 6 أعمدة للحصول على التوازن المثالي */
         .iconGrid {
             width: 90%;
             max-width: 450px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
             justify-items: center;
             direction: ltr !important; 
         }
             
         /* ICON BUTTONS */
         .iconBtn {
+            grid-column: span 2; /* الأزرار الصغيرة تأخذ عمودين (3 في الصف) */
             position: relative;
             display: flex;
             align-items: center;
@@ -86,6 +91,21 @@
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
+        /* WIDE BUTTONS (Website & Newsletter) */
+        .website, .newsletter {
+            grid-column: span 3; /* الأزرار الكبيرة تأخذ 3 أعمدة (2 في الصف) */
+            width: 100%;
+            height: 90px;
+            font-size: 14px;
+            font-weight: 700;
+            gap: 10px;
+            margin-bottom: 0; 
+        }
+        
+        .siteLogo { width: 30px; height: 30px; flex-shrink: 0; }
+        .newsletter i { font-size: 24px; }
+
+        /* منع بكسلة الصور والرموز أثناء التكبير وإضافة will-change */
         .iconBtn i, .iconBtn span, .iconBtn img {
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -105,8 +125,9 @@
                 z-index: 10;
             }
             
-            /* أنيميشن Beat للأيقونات العادية عند المرور */
-            .iconBtn:not(.newsletter):hover i {
+            /* أنيميشن Beat للأيقونات العادية واللوجو عند المرور */
+            .iconBtn:not(.newsletter):hover i,
+            .iconBtn:not(.newsletter):hover img {
                 animation: fa-beat 1.2s infinite ease-in-out;
             }
             
@@ -124,7 +145,8 @@
         }
 
         /* تفعيل الأنيميشن عند اللمس (للموبايل) */
-        .iconBtn:not(.newsletter):active i {
+        .iconBtn:not(.newsletter):active i,
+        .iconBtn:not(.newsletter):active img {
             animation: fa-beat 0.8s infinite ease-in-out;
         }
         .iconBtn.newsletter:active i {
@@ -157,27 +179,6 @@
             visibility: visible;
             transform: translateX(-50%) translateY(0) translateZ(0);
         }
-        
-        /* FULL WIDTH BUTTONS (Website & Newsletter) */
-        .website, .newsletter {
-            grid-column: 1 / span 3;
-            width: 100%;
-            height: 85px;
-            background: var(--main);
-            color: var(--light);
-            font-size: 18px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px; /* مسافة بين الأزرار الكبيرة */
-        }
-        
-        /* إزالة الهامش من الزر الثاني حتى لا تزيد المسافة عن الشبكة */
-        .website { margin-bottom: 0; } 
-        
-        .siteLogo { width: 38px; height: 38px; flex-shrink: 0; }
 
         .light-logo { display: none; }
         .dark-logo { display: block; }
@@ -254,20 +255,15 @@
 
     <div class="iconGrid">
         
-        <a class="iconBtn newsletter" href="https://mailchi.mp/d9aa7403bb38/join-nadim-foundation-mailing-list" id="newsBtn" data-ar="النشرة البريدية" data-en="Mailing List">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span id="newsText">Newsletter</span>
-            <i class="fa-solid fa-envelope-open-text"></i>
-        </a>
-
         <a class="iconBtn website" href="https://www.nadimfoundation.org/" id="webBtn" data-ar="الموقع الرئيسي" data-en="Official Website">
             <img class="siteLogo light-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.svg" alt="Icon Left">
             <img class="siteLogo dark-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-light.svg" alt="Icon Left">
-            
             <span id="webText">Nadim Foundation</span>
-            
-            <img class="siteLogo light-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.svg" alt="Icon Right">
-            <img class="siteLogo dark-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-light.svg" alt="Icon Right">
+        </a>
+
+        <a class="iconBtn newsletter" href="https://mailchi.mp/d9aa7403bb38/join-nadim-foundation-mailing-list" id="newsBtn" data-ar="نشرتنا" data-en="Newsletter">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span id="newsText">Newsletter</span>
         </a>
 
         <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" data-ar="فيسبوك" data-en="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -306,8 +302,8 @@
             el.setAttribute('data-tooltip', label || '');
         });
         
-        webText.innerHTML = currentLang === 'ar' ? "مـــؤســسـة نــديــم" : "Nadim Foundation";
-        newsText.innerHTML = currentLang === 'ar' ? "نـشـرتـنـا" : "Newsletter";
+        webText.innerHTML = currentLang === 'ar' ? "مؤسسة نديم" : "Nadim Foundation";
+        newsText.innerHTML = currentLang === 'ar' ? "نشرتنا" : "Newsletter";
         
         const savedTheme = localStorage.getItem("theme");
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
