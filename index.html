@@ -33,19 +33,17 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* تم تقليل المسافة العلوية لتناسب الارتفاع الجديد للهيدر */
         .pageWrapper {
             padding-top: 150px; 
         }
 
-        /* تثبيت مساحة النص لمنع اهتزاز اللوجوهات عند تغيير اللغة */
         #webText, #newsText {
             width: 170px; 
             text-align: center;
             display: inline-block;
         }
 
-        /* HEADER - تم تقليل الارتفاع والدوران */
+        /* HEADER */
         .logoStrip {
             position: fixed;
             top: 0;
@@ -54,12 +52,44 @@
             box-sizing: border-box;
             z-index: 1000;
             background: var(--light);
-            padding: 12px 20px; /* تقليل المسافة من فوق وتحت */
-            border-radius: 0 0 35px 35px; /* تناسب أفضل مع الارتفاع الأقل */
+            padding: 12px 20px; 
+            border-radius: 0 0 35px 35px; 
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            /* إضافة Transition لنعومة الحركة */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        .logo { width: 250px; display: block; margin: 0 auto; }
+        .logo { 
+            width: 250px; 
+            display: block; 
+            margin: 0 auto; 
+            /* إضافة Transition للوجو */
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* --- التصغير عند السكرول (جديد) --- */
+        .logoStrip.shrink {
+            padding: 5px 20px; /* تقليل المسافات */
+            border-radius: 0 0 15px 15px; /* تقليل دوران الحواف */
+            background: rgba(234, 232, 216, 0.95); /* إضافة شفافية بسيطة جداً لو حابب، أو خليها لون عادي */
+            backdrop-filter: blur(10px); /* تأثير بلور للخلفية الشفافة */
+        }
+        
+        /* تظبيط الشفافية في الدارك مود */
+        body:not(.light) .logoStrip.shrink {
+            background: rgba(234, 232, 216, 0.95);
+        }
+        
+        /* تظبيط الشفافية في اللايت مود */
+        body.light .logoStrip.shrink {
+            background: rgba(234, 232, 216, 0.95); 
+        }
+
+        .logoStrip.shrink .logo {
+            width: 150px; /* تصغير اللوجو بشكل ملحوظ */
+        }
+        /* --------------------------------- */
+
 
         /* GRID */
         .iconGrid {
@@ -116,13 +146,11 @@
                 z-index: 10;
             }
             
-            /* أنيميشن Beat للأيقونات العادية واللوجو عند المرور */
             .iconBtn:not(.newsletter):hover i,
             .iconBtn:not(.newsletter):hover img.siteLogo {
                 animation: fa-beat 1.2s infinite ease-in-out;
             }
             
-            /* أنيميشن Shake لزر النشرة الإخبارية عند المرور */
             .iconBtn.newsletter:hover i {
                 animation: fa-shake 0.8s infinite linear;
             }
@@ -135,7 +163,6 @@
             transition: all 0.1s;
         }
 
-        /* تفعيل الأنيميشن عند اللمس (للموبايل) */
         .iconBtn:not(.newsletter):active i,
         .iconBtn:not(.newsletter):active img.siteLogo {
             animation: fa-beat 0.8s infinite ease-in-out;
@@ -171,9 +198,9 @@
             transform: translateX(-50%) translateY(0) translateZ(0);
         }
         
-        /* FULL WIDTH BUTTONS (Website & Newsletter) */
+        /* FULL WIDTH BUTTONS */
         .full-width-btn {
-            grid-column: 1 / span 3; /* يأخذ الـ 3 أعمدة كاملة */
+            grid-column: 1 / span 3; 
             width: 100%;
             height: 85px;
             background: var(--main);
@@ -186,7 +213,6 @@
             gap: 15px;
         }
         
-        /* تقليل حجم أيقونة الظرف ليتناسب مع اللوجو */
         .newsletter i { font-size: 26px; }
 
         .siteLogo { width: 38px; height: 38px; flex-shrink: 0; }
@@ -207,14 +233,14 @@
             overflow: hidden;
             border: 3px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            display: block; /* لضمان أن الرابط يغطي الخريطة بالكامل */
+            display: block; 
             cursor: pointer;
         }
         .map iframe { 
             width: 100%; 
             height: 100%; 
             border: 0; 
-            pointer-events: none; /* إيقاف تفاعل الـ iframe حتى يعمل الرابط الخارجي */
+            pointer-events: none; 
         }
 
         /* FLOAT BAR */
@@ -251,7 +277,6 @@
             border-color: transparent;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
         }
-        /* تطبيق خصائص اللايت مود على الأزرار الكبيرة */
         .light .full-width-btn { background: var(--light); border: 2px solid transparent; }
         
         .light .iconBtn:hover, .light .iconBtn:active { 
@@ -268,7 +293,7 @@
 <body class="lang-ar">
 
 <div class="pageWrapper">
-    <header class="logoStrip">
+    <header class="logoStrip" id="mainHeader">
         <img class="logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-site.png" alt="Nadim Logo">
     </header>
 
@@ -317,6 +342,7 @@
     const themeBtn = document.getElementById("themeBtn");
     const webText = document.getElementById("webText");
     const newsText = document.getElementById("newsText");
+    const mainHeader = document.getElementById("mainHeader"); // ربط الهيدر
     
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
@@ -362,6 +388,16 @@
             alert(currentLang === 'ar' ? "تم نسخ الرابط!" : "Link Copied!");
         }
     }
+
+    // --- مراقبة السكرول لتصغير الهيدر (جديد) ---
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            mainHeader.classList.add("shrink");
+        } else {
+            mainHeader.classList.remove("shrink");
+        }
+    }, { passive: true });
+    // ----------------------------------------
 
     window.onload = () => {
         const savedTheme = localStorage.getItem("theme");
