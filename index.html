@@ -79,7 +79,6 @@
             z-index: 1000;
             background: var(--light);
             padding: 12px 20px; 
-            border-radius: 0 0 35px 35px; 
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden; /* عشان الووتر مارك ميخرجش بره الدوران */
@@ -114,7 +113,6 @@
 
         .logoStrip.shrink {
             padding: 5px 20px; 
-            border-radius: 0 0 15px 15px; 
             background: rgba(234, 232, 216, 0.95); 
             backdrop-filter: blur(10px); 
         }
@@ -284,30 +282,61 @@
             pointer-events: none; 
         }
 
-        /* FLOAT BAR */
-        .floatingBar {
-            position: fixed;
-            bottom: calc(25px + env(safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 30px;
-            border-radius: 50px;
-            display: flex;
-            gap: 25px;
-            background: rgba(6, 68, 76, 0.96); /* موحد مع لون main بدل الرمادي الغريب */
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            direction: ltr !important; 
+       /* CONTROLS (شريط الأدوات المطور) */
+        .controls { 
+            position: fixed; 
+            bottom: calc(25px + env(safe-area-inset-bottom)); /* تم إضافة حماية شاشات الآيفون */
+            left: 50%; transform: translateX(-50%); 
+            background: rgba(6, 68, 76, 0.96) !important; backdrop-filter: blur(15px);
+            padding: 12px 30px; border-radius: 50px; display: flex; align-items: center; gap: 25px; 
+            z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid var(--gold) !important; 
+            direction: ltr !important; transition: transform 0.35s ease, opacity 0.35s ease, bottom 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
         }
-        .ctrl { 
-            position: relative;
-            font-size: 24px; 
-            cursor: pointer; 
-            color: var(--light); /* موحد مع الباليت بدل كلمة white */
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            -webkit-tap-highlight-color: transparent;
+        .controls div { font-size: 24px; cursor: pointer; color: var(--light) !important; transition: 0.2s; position: relative; } 
+        
+        .controls div {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .controls div:hover {
+            transform: translateZ(0) scale(1.15); 
+            color: var(--gold) !important; 
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3)); 
+        }
+
+        .controls > div::before {
+            content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%;
+            transform: translateX(-50%) translateY(10px); 
+            background: rgba(6, 68, 76, 0.50); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); 
+            color: var(--gold); 
+            padding: 8px 15px; border-radius: 12px; font-size: 14px; white-space: nowrap; font-weight: 800;
+            opacity: 0; visibility: hidden; transition: 0.3s; pointer-events: none; font-family: 'Tajawal', sans-serif;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .controls > div:hover::before { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        /* حالة الخمول: مقاس أكبر وشفافية أقل عشان يفضل ظاهر */
+        .controls.controls-mini {
+            transform: translateX(-50%) scale(0.85); 
+            opacity: 0.5; 
+            bottom: calc(15px + env(safe-area-inset-bottom)); /* تم إضافة حماية الآيفون هنا كمان */
+            background: rgba(6, 68, 76, 0.80) !important;
+            border-color: rgba(225, 169, 62, 0.40) !important;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .controls.controls-mini:hover,
+        .controls.controls-mini:focus-within {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            bottom: calc(25px + env(safe-area-inset-bottom)); /* تم إضافة حماية الآيفون هنا كمان */
+            background: rgba(6, 68, 76, 0.96) !important;
+            border-color: var(--gold) !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         /* LIGHT MODE */
@@ -322,7 +351,8 @@
         
         .light .iconBtn:hover, .light .iconBtn:active { 
             border-color: var(--gold); 
-            background: var(--light); 
+            /* هنا السحر: خلينا الخلفية لونها غامق بشفافية 5% عشان تشف الووتر مارك */
+            background: rgba(6, 68, 76, 0.05); 
         }
 
         .footer { margin-top: 40px; opacity: .5; font-size: 13px; font-weight: 500;}
@@ -373,9 +403,11 @@
 </div>
 
 <div class="floatingBar">
-    <div class="ctrl" id="shareBtn" onclick="share()" data-ar="مشاركة" data-en="Share">🔗</div>
-    <div class="ctrl" id="themeBtn" onclick="toggleTheme()" data-ar="المظهر" data-en="Theme">☀️</div>
-    <div class="ctrl" id="langBtn" onclick="toggleLang()" data-ar="اللغة" data-en="Language">🌐</div>
+    <div class="controls">
+    <div onclick="share()" data-ar="مشاركة" data-en="Share">🔗</div>
+    <div id="themeBtn" onclick="toggleTheme()" data-ar="المظهر" data-en="Theme">☀️</div>
+    <div onclick="toggleLang()" data-ar="اللغة" data-en="Language">🌐</div>
+</div>
 </div>
 
 <script>
@@ -384,7 +416,26 @@
     const webText = document.getElementById("webText");
     const newsText = document.getElementById("newsText");
     const mainHeader = document.getElementById("mainHeader"); 
-    
+   
+    let controlsTimer;
+    const controlsEl = document.querySelector('.controls');
+
+    function expandControls() {
+        controlsEl.classList.remove('controls-mini');
+        clearTimeout(controlsTimer);
+    }
+
+    function resetControlsTimer() {
+        expandControls();
+        controlsTimer = setTimeout(() => { controlsEl.classList.add('controls-mini'); }, 2500); 
+    }
+
+    window.addEventListener('scroll', resetControlsTimer, { passive: true });
+    window.addEventListener('touchstart', resetControlsTimer, { passive: true });
+    controlsEl.addEventListener('mouseenter', expandControls);
+    controlsEl.addEventListener('mouseleave', resetControlsTimer);
+    controlsEl.addEventListener('touchstart', resetControlsTimer, { passive: true });
+    resetControlsTimer();
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
 
