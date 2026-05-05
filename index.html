@@ -114,6 +114,7 @@
         .logoStrip.shrink {
             padding: 5px 20px; 
             background: rgba(234, 232, 216, 0.95); 
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px); 
         }
         
@@ -157,6 +158,8 @@
             border: 2px solid transparent;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
             z-index: 1;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -282,19 +285,24 @@
             pointer-events: none; 
         }
 
-       /* CONTROLS (شريط الأدوات المطور) */
+        /* CONTROLS (شريط الأدوات المطور) */
         .controls { 
             position: fixed; 
-            bottom: calc(25px + env(safe-area-inset-bottom)); /* تم إضافة حماية شاشات الآيفون */
+            bottom: calc(25px + env(safe-area-inset-bottom)); 
             left: 50%; transform: translateX(-50%); 
-            background: rgba(6, 68, 76, 0.96) !important; backdrop-filter: blur(15px);
+            /* السطر ده رجعناه للون الدارك القديم اللي عجبك */
+            background: rgba(10, 30, 35, 0.96) !important; 
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
             padding: 12px 30px; border-radius: 50px; display: flex; align-items: center; gap: 25px; 
             z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid var(--gold) !important; 
             direction: ltr !important; transition: transform 0.35s ease, opacity 0.35s ease, bottom 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
         }
-        .controls div { font-size: 24px; cursor: pointer; color: var(--light) !important; transition: 0.2s; position: relative; } 
         
-        .controls div {
+        .controls div { 
+            font-size: 24px; cursor: pointer; color: var(--light) !important; position: relative;
+            -webkit-user-select: none;
+            user-select: none;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             backface-visibility: hidden;
             transform: translateZ(0);
@@ -309,8 +317,10 @@
         .controls > div::before {
             content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%;
             transform: translateX(-50%) translateY(10px); 
-            background: rgba(6, 68, 76, 0.50); 
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); 
+            /* التول تيب كمان خدت من نفس درجة اللون القديمة */
+            background: rgba(10, 30, 35, 0.85); 
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px); 
             color: var(--gold); 
             padding: 8px 15px; border-radius: 12px; font-size: 14px; white-space: nowrap; font-weight: 800;
             opacity: 0; visibility: hidden; transition: 0.3s; pointer-events: none; font-family: 'Tajawal', sans-serif;
@@ -323,8 +333,9 @@
         .controls.controls-mini {
             transform: translateX(-50%) scale(0.85); 
             opacity: 0.5; 
-            bottom: calc(15px + env(safe-area-inset-bottom)); /* تم إضافة حماية الآيفون هنا كمان */
-            background: rgba(6, 68, 76, 0.80) !important;
+            bottom: calc(15px + env(safe-area-inset-bottom)); 
+            /* اللون القديم وقت الخمول */
+            background: rgba(10, 30, 35, 0.80) !important; 
             border-color: rgba(225, 169, 62, 0.40) !important;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
         }
@@ -333,8 +344,9 @@
         .controls.controls-mini:focus-within {
             transform: translateX(-50%) scale(1);
             opacity: 1;
-            bottom: calc(25px + env(safe-area-inset-bottom)); /* تم إضافة حماية الآيفون هنا كمان */
-            background: rgba(6, 68, 76, 0.96) !important;
+            bottom: calc(25px + env(safe-area-inset-bottom)); 
+            /* اللون القديم وقت الفتح */
+            background: rgba(10, 30, 35, 0.96) !important; 
             border-color: var(--gold) !important;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
@@ -402,12 +414,10 @@
     <div class="footer">Nadim Foundation ©® 2018</div>
 </div>
 
-<div class="floatingBar">
-    <div class="controls">
+<div class="controls">
     <div onclick="share()" data-ar="مشاركة" data-en="Share">🔗</div>
     <div id="themeBtn" onclick="toggleTheme()" data-ar="المظهر" data-en="Theme">☀️</div>
     <div onclick="toggleLang()" data-ar="اللغة" data-en="Language">🌐</div>
-</div>
 </div>
 
 <script>
