@@ -446,33 +446,32 @@
     controlsEl.addEventListener('mouseleave', resetControlsTimer);
     controlsEl.addEventListener('touchstart', resetControlsTimer, { passive: true });
     resetControlsTimer();
+    
     const systemLang = navigator.language || navigator.userLanguage;
     let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
 
-    function updateLabels() {
-        document.querySelectorAll('[data-ar]').forEach(el => {
-            const label = el.getAttribute(`data-${currentLang}`);
-            el.setAttribute('data-tooltip', label || '');
-        });
-        
-        webText.innerHTML = currentLang === 'ar' ? "مـــؤســسـة نــديــم" : "Nadim Foundation";
-        newsText.innerHTML = currentLang === 'ar' ? "اشترك في نشرتنا البريدية" : "Subscribe to Our Newsletter";
-        
+    // ==========================================
+    // جزء المظهر (Theme Logic) المحدث
+    // ==========================================
+    function applyTheme() {
         const savedTheme = localStorage.getItem("theme");
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
+        let isLight;
+
+        if (savedTheme) {
+            isLight = savedTheme === "light";
+        } else {
+            isLight = !prefersDark;
+        }
+
+        if (isLight) {
             body.classList.add("light");
             themeBtn.innerHTML = "🌙";
         } else {
             body.classList.remove("light");
             themeBtn.innerHTML = "☀️";
         }
-    }
-
-    function toggleLang() {
-        currentLang = currentLang === 'ar' ? 'en' : 'ar';
-        updateLabels();
     }
 
     function toggleTheme() {
@@ -482,6 +481,27 @@
         localStorage.setItem("theme", isLight ? "light" : "dark");
     }
 
+    // ==========================================
+    // جزء اللغة (Language Logic) بعد تنظيفه
+    // ==========================================
+    function updateLabels() {
+        document.querySelectorAll('[data-ar]').forEach(el => {
+            const label = el.getAttribute(`data-${currentLang}`);
+            el.setAttribute('data-tooltip', label || '');
+        });
+        
+        webText.innerHTML = currentLang === 'ar' ? "مـــؤســسـة نــديــم" : "Nadim Foundation";
+        newsText.innerHTML = currentLang === 'ar' ? "اشترك في نشرتنا البريدية" : "Subscribe to Our Newsletter";
+    }
+
+    function toggleLang() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        updateLabels();
+    }
+
+    // ==========================================
+    // باقي الوظائف (مشاركة، سكرول، الخ)
+    // ==========================================
     function share() {
         if (navigator.share) {
             navigator.share({ title: "Nadim Foundation", url: window.location.href });
@@ -499,17 +519,20 @@
         }
     }, { passive: true });
 
+    // ==========================================
+    // عند تحميل الصفحة
+    // ==========================================
     window.onload = () => {
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme) {
-            if (savedTheme === "light") body.classList.add("light");
-        } else if (!prefersDark) {
-            body.classList.add("light");
-        }
+        applyTheme();
         updateLabels();
     };
+
+    // الاستماع لتغيير مظهر الجهاز تلقائياً
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem("theme")) {
+            applyTheme();
+        }
+    });
 </script>
 
 </body>
