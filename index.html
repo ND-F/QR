@@ -1,538 +1,1618 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Nadim Foundation - مؤسسة نديم</title>
 
-    <meta name="theme-color" content="#06444C" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#EAE8D8" media="(prefers-color-scheme: light)">
-    
-    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg?v=2" media="(prefers-color-scheme: dark)">
-    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg?v=2" media="(prefers-color-scheme: light)">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg?v=2">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
 
-    <style>
-        :root { 
-            --main: #06444C; 
-            --light: #EAE8D8; 
-            --gold: #E1A93E; 
-            --accent: #ADCAC9;
-            --darkred: #4A121C;
-        }
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 500; /* Medium كوزن افتراضي */
-            text-align: center;
-            background: var(--main); /* الافتراضي هنا دارك */
-            color: var(--light);
-            padding-bottom: calc(120px + env(safe-area-inset-bottom));
-            transition: background 0.4s ease, color 0.4s ease;
-            -webkit-font-smoothing: antialiased;
-        }
+<title>
+Nadim Foundation - مؤسسة نديم
+</title>
 
-        /* ========================================== */
-        /* نقش الخلفية لكامل الشاشة (اللايت والدارك) */
-        /* ========================================== */
-        body::before {
-            content: "";
-            position: fixed; 
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            /* الافتراضي للمشروع ده دارك، فهياخد الأيقونة الفاتحة */
-            background-image: url('https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg?v=2');
-            background-size: 55px 55px; /* قللنا الحجم لـ 55px عشان الأيقونات تقرب من بعضها (كانت 80) */
-            background-position: center;
-            opacity: 0.12; /*  ضاعفنا درجة الوضوح مرتين لـ 0.09 (كانت 0.03) */
-            pointer-events: none; z-index: -1; 
-            transition: background-image 0.4s ease, opacity 0.4s ease;
-        }
+<meta
+  name="theme-color"
+  content="#06444C"
+  media="(prefers-color-scheme: dark)"
+>
 
-        body.light::before {
-            /* لما يقلب لايت ياخد الأيقونة الغامقة */
-            background-image: url('https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg?v=2');
-            opacity: 0.09; /* زودنا الوضوح في وضع الدارك كمان */
-        }
+<meta
+  name="theme-color"
+  content="#EAE8D8"
+  media="(prefers-color-scheme: light)"
+>
 
-        .pageWrapper {
-            padding-top: 150px; 
-        }
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg?v=2"
+  media="(prefers-color-scheme: dark)"
+>
 
-        #webText, #newsText {
-            width: 170px; 
-            text-align: center;
-            display: inline-block;
-        }
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg?v=2"
+  media="(prefers-color-scheme: light)"
+>
 
-        /* HEADER */
-        .logoStrip {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            box-sizing: border-box;
-            z-index: 1000;
-            background: var(--light);
-            padding: 12px 20px; 
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden; /* عشان الووتر مارك ميخرجش بره الدوران */
-        }
-        
-        /* ========================================== */
-        /* الووتر مارك نقش الخاص بالهيدر (مسافات ضيقة) */
-        /* ========================================== */
-        .logoStrip::before {
-            content: "";
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* الهيدر دايما فاتح، فهياخد الأيقونة الغامقة دايما */
-            background-image: url('https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg?v=2');
-            background-size: 30px 30px; /* مساحات ضيقة جدا */
-            background-position: center;
-            opacity: 0.12; 
-            pointer-events: none; z-index: 0;
-        }
+<link
+  rel="apple-touch-icon"
+  href="https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg?v=2"
+>
 
-        /* رفع المحتوى فوق الووتر مارك */
-        .logoStrip > * {
-            position: relative;
-            z-index: 1;
-        }
+<link
+  href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;800;900&display=swap"
+  rel="stylesheet"
+>
 
-        .logo { 
-            width: 250px; 
-            display: block; 
-            margin: 0 auto; 
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+>
 
-        .logoStrip.shrink {
-            padding: 5px 20px; 
-            background: rgba(234, 232, 216, 0.95); 
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px); 
-        }
-        
-        body:not(.light) .logoStrip.shrink {
-            background: rgba(234, 232, 216, 0.95);
-        }
-        
-        body.light .logoStrip.shrink {
-            background: rgba(234, 232, 216, 0.95); 
-        }
+<style>
 
-        .logoStrip.shrink .logo {
-            width: 150px; 
-        }
+:root{
 
-        /* GRID */
-        .iconGrid {
-            width: 90%;
-            max-width: 450px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            justify-items: center;
-            direction: ltr !important; 
-        }
-            
-        /* ICON BUTTONS */
-        .iconBtn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 90px; 
-            height: 90px;
-            border-radius: 26px;
-            font-size: 43px;
-            text-decoration: none;
-            background: var(--main);
-            color: var(--light);
-            border: 2px solid transparent;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            -webkit-tap-highlight-color: transparent;
-            -webkit-user-select: none;
-            user-select: none;
-            z-index: 1;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-        }
+  --main:#06444C;
 
-        .iconBtn i, .iconBtn span, .iconBtn img {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            transform: translateZ(0);
-            will-change: transform; 
-            image-rendering: -webkit-optimize-contrast;
-        }
+  --light:#EAE8D8;
 
-        /* Hover Animations */
-        @media (hover: hover) {
-            .iconBtn:hover {
-                transform: translateY(-10px) scale(1.12);
-                color: var(--gold) !important;
-                border-color: var(--gold);
-                background: rgba(234, 232, 216, 0.05);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-                z-index: 1001; 
-            }
-            
-            .iconBtn:not(.newsletter):hover i,
-            .iconBtn:not(.newsletter):hover img.siteLogo {
-                animation: fa-beat 1.2s infinite ease-in-out;
-            }
-            
-            .iconBtn.newsletter:hover i {
-                animation: fa-shake 0.8s infinite linear;
-            }
-        }
+  --gold:#E1A93E;
 
-        .iconBtn:active {
-            transform: translateY(-5px) scale(1.1);
-            border-color: var(--gold);
-            color: var(--gold) !important;
-            z-index: 1001; 
-            transition: all 0.1s;
-        }
+  --accent:#ADCAC9;
 
-        .iconBtn:not(.newsletter):active i,
-        .iconBtn:not(.newsletter):active img.siteLogo {
-            animation: fa-beat 0.8s infinite ease-in-out;
-        }
-        .iconBtn.newsletter:active i {
-            animation: fa-shake 0.5s infinite linear;
-        }
-            
-        .iconBtn::before, .ctrl::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px) translateZ(0);
-            background: var(--main);
-            color: var(--light);
-            padding: 8px 15px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 800; /* Extra Bold */
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            pointer-events: none;
-            z-index: 1000;
-        }
-            
-        .iconBtn:hover::before, .ctrl:hover::before {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0) translateZ(0);
-        }
-        
-        /* FULL WIDTH BUTTONS */
-        .full-width-btn {
-            grid-column: 1 / span 3; 
-            width: 100%;
-            height: 85px;
-            background: var(--main);
-            color: var(--light);
-            font-size: 18px;
-            font-weight: 800; /* Extra Bold */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .newsletter i { font-size: 43px; }
+  --darkred:#4A121C;
 
-        .siteLogo { height: 72.3px; width: auto; flex-shrink: 0; }
+}
 
-        .light-logo { display: none; }
-        .dark-logo { display: block; }
-        
-        .light .light-logo { display: block; }
-        .light .dark-logo { display: none; }
+*{
+  box-sizing:border-box;
+}
 
-        /* MAP */
-        .map {
-            margin: 50px auto;
-            width: 90%;
-            max-width: 450px;
-            height: 180px;
-            border-radius: 28px;
-            overflow: hidden;
-            border: 3px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            display: block; 
-            cursor: pointer;
-        }
-        .map iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
-            pointer-events: none; 
-        }
+html{
+  scroll-behavior:smooth;
+}
 
-        /* CONTROLS (شريط الأدوات المطور) */
-        .controls { 
-            position: fixed; 
-            bottom: calc(25px + env(safe-area-inset-bottom)); 
-            left: 50%; transform: translateX(-50%); 
-            /* السطر ده رجعناه للون الدارك القديم اللي عجبك */
-            background: rgba(10, 30, 35, 0.96) !important; 
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-            padding: 12px 30px; border-radius: 50px; display: flex; align-items: center; gap: 25px; 
-            z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid var(--gold) !important; 
-            direction: ltr !important; transition: transform 0.35s ease, opacity 0.35s ease, bottom 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
-        }
-        
-        .controls div { 
-            font-size: 24px; cursor: pointer; color: var(--light) !important; position: relative;
-            -webkit-user-select: none;
-            user-select: none;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            backface-visibility: hidden;
-            transform: translateZ(0);
-        }
+body{
 
-        .controls div:hover {
-            transform: translateZ(0) scale(1.15); 
-            color: var(--gold) !important; 
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3)); 
-        }
+  margin:0;
+  padding:0;
 
-        .controls > div::before {
-            content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%;
-            transform: translateX(-50%) translateY(10px); 
-            /* التول تيب كمان خدت من نفس درجة اللون القديمة */
-            background: rgba(10, 30, 35, 0.85); 
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px); 
-            color: var(--gold); 
-            padding: 8px 15px; border-radius: 12px; font-size: 14px; white-space: nowrap; font-weight: 800;
-            opacity: 0; visibility: hidden; transition: 0.3s; pointer-events: none; font-family: 'Tajawal', sans-serif;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        
-        .controls > div:hover::before { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  font-family:'Tajawal',sans-serif;
 
-        /* حالة الخمول: مقاس أكبر وشفافية أقل عشان يفضل ظاهر */
-        .controls.controls-mini {
-            transform: translateX(-50%) scale(0.85); 
-            opacity: 0.5; 
-            bottom: calc(15px + env(safe-area-inset-bottom)); 
-            /* اللون القديم وقت الخمول */
-            background: rgba(10, 30, 35, 0.80) !important; 
-            border-color: rgba(225, 169, 62, 0.40) !important;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
+  font-weight:500;
 
-        .controls.controls-mini:hover,
-        .controls.controls-mini:focus-within {
-            transform: translateX(-50%) scale(1);
-            opacity: 1;
-            bottom: calc(25px + env(safe-area-inset-bottom)); 
-            /* اللون القديم وقت الفتح */
-            background: rgba(10, 30, 35, 0.96) !important; 
-            border-color: var(--gold) !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
+  text-align:center;
 
-        /* LIGHT MODE */
-        .light { background: var(--light); color: var(--main); }
-        .light .iconBtn { 
-            background: var(--light);
-            color: var(--main);
-            border-color: transparent;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-        }
-        .light .full-width-btn { background: var(--light); border: 2px solid transparent; }
-        
-        .light .iconBtn:hover, .light .iconBtn:active { 
-            border-color: var(--gold); 
-            /* هنا السحر: خلينا الخلفية لونها غامق بشفافية 5% عشان تشف الووتر مارك */
-            background: rgba(6, 68, 76, 0.05); 
-        }
+  background:var(--main);
 
-        .footer { margin-top: 40px; opacity: .5; font-size: 13px; font-weight: 500;}
-        .lang-ar { direction: rtl; }
-        .lang-en { direction: ltr; }
-    </style>
+  color:var(--light);
+
+  overflow-x:hidden;
+
+  padding-bottom:
+    calc(
+      120px +
+      env(safe-area-inset-bottom)
+    );
+
+  transition:
+    background .45s ease,
+    color .45s ease;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+}
+
+/* ========================================== */
+/* GLOBAL PATTERN */
+/* ========================================== */
+
+body::before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  background-image:
+    url(
+      'https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim-light.svg?v=2'
+    );
+
+  background-size:
+    55px 55px;
+
+  background-position:center;
+
+  opacity:.10;
+
+  pointer-events:none;
+
+  z-index:-1;
+
+  transition:
+    opacity .45s ease,
+    background-image .45s ease;
+
+}
+
+body.light::before{
+
+  background-image:
+    url(
+      'https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg?v=2'
+    );
+
+  opacity:.08;
+
+}
+
+/* ========================================== */
+/* LIGHT MODE */
+/* ========================================== */
+
+body.light{
+
+  background:var(--light);
+
+  color:var(--main);
+
+}
+
+/* ========================================== */
+/* HEADER */
+/* ========================================== */
+
+.logoStrip{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+
+  z-index:1000;
+
+  overflow:hidden;
+
+  background:
+    rgba(234,232,216,0.96);
+
+  border-bottom:
+    2px solid
+    rgba(225,169,62,0.72);
+
+  box-shadow:
+    0 6px 30px rgba(0,0,0,0.20);
+
+  transition:
+    all .45s
+    cubic-bezier(
+      .175,
+      .885,
+      .32,
+      1.275
+    );
+
+}
+
+.logoStrip::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background-image:
+    url(
+      'https://raw.githubusercontent.com/ND-F/Q/main/images/icon-nadim.svg?v=2'
+    );
+
+  background-size:
+    36px 36px;
+
+  opacity:.10;
+
+  pointer-events:none;
+
+}
+
+.logoStrip > *{
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+.logoWrap{
+
+  min-height:150px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    24px 30px;
+
+}
+
+.logo{
+
+  width:260px;
+
+  transition:
+    width .45s
+    cubic-bezier(
+      .175,
+      .885,
+      .32,
+      1.275
+    );
+
+}
+
+.logoStrip.shrink{
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+}
+
+.logoStrip.shrink .logo{
+
+  width:170px;
+
+}
+
+/* ========================================== */
+/* PAGE WRAPPER */
+/* ========================================== */
+
+.pageWrapper{
+
+  padding-top:170px;
+
+}
+
+/* ========================================== */
+/* GRID */
+/* ========================================== */
+
+.iconGrid{
+
+  width:92%;
+
+  max-width:500px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:24px;
+
+  justify-items:center;
+
+  direction:ltr !important;
+
+}
+
+/* ========================================== */
+/* PREMIUM GLASS CARDS */
+/* ========================================== */
+
+.iconBtn{
+
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  width:96px;
+  height:96px;
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  isolation:isolate;
+
+  text-decoration:none;
+
+  color:var(--light);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.04);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,22,25,0.88),
+      rgba(5,14,16,0.96)
+    );
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+
+  transition:
+    transform .55s cubic-bezier(.175,.885,.32,1.275),
+    background .45s ease,
+    color .45s ease,
+    border-color .45s ease,
+    box-shadow .45s ease;
+
+}
+
+/* reflective layer */
+
+.iconBtn::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,255,255,0.06),
+      transparent 42%
+    );
+
+  opacity:.75;
+
+  pointer-events:none;
+
+  z-index:0;
+
+}
+
+/* tooltip */
+
+.iconBtn::before{
+
+  content:attr(data-tooltip);
+
+  position:absolute;
+
+  bottom:125%;
+  left:50%;
+
+  transform:
+    translateX(-50%)
+    translateY(12px);
+
+  background:
+    rgba(10,30,35,0.82);
+
+  color:var(--gold);
+
+  padding:
+    10px 16px;
+
+  border-radius:14px;
+
+  font-size:14px;
+  font-weight:800;
+
+  white-space:nowrap;
+
+  opacity:0;
+  visibility:hidden;
+
+  pointer-events:none;
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
+  border:
+    1px solid
+    rgba(225,169,62,0.18);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.30);
+
+  transition:
+    .35s cubic-bezier(.175,.885,.32,1.275);
+
+  z-index:9999;
+
+}
+
+.iconBtn:hover::before{
+
+  opacity:1;
+  visibility:visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+/* icon layer */
+
+.iconBtn i,
+.iconBtn img,
+.iconBtn span{
+
+  position:relative;
+
+  z-index:2;
+
+  transition:
+    transform .45s ease,
+    color .45s ease;
+
+}
+
+/* hover */
+
+.iconBtn:hover{
+
+  transform:
+    translateY(-10px)
+    scale(1.11);
+
+  color:var(--gold) !important;
+
+  border-color:
+    rgba(225,169,62,0.65);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(12,26,30,0.92),
+      rgba(7,18,20,0.98)
+    );
+
+  box-shadow:
+    0 22px 45px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(225,169,62,0.14);
+
+}
+
+.iconBtn:hover i,
+.iconBtn:hover img{
+
+  transform:
+    scale(1.08);
+
+}
+
+/* active */
+
+.iconBtn:active{
+
+  transform:
+    translateY(-4px)
+    scale(1.06);
+
+}
+
+/* gold line */
+
+.goldLine{
+
+  position:absolute;
+
+  bottom:0;
+  left:0;
+
+  width:0;
+  height:2px;
+
+  background:var(--gold);
+
+  transition:
+    width .55s ease;
+
+  z-index:5;
+
+}
+
+.iconBtn:hover .goldLine{
+
+  width:100%;
+
+}
+
+/* ========================================== */
+/* FULL WIDTH BUTTONS */
+/* ========================================== */
+
+.full-width-btn{
+
+  grid-column:1 / span 3;
+
+  width:100%;
+  height:92px;
+
+  gap:18px;
+
+  font-size:18px;
+  font-weight:800;
+
+}
+
+.full-width-btn span{
+
+  position:relative;
+
+  z-index:3;
+
+  letter-spacing:.03em;
+
+}
+
+.full-width-btn img,
+.full-width-btn i{
+
+  position:relative;
+
+  z-index:3;
+
+}
+
+/* ========================================== */
+/* ICONS */
+/* ========================================== */
+
+.newsletter i{
+
+  font-size:42px;
+
+}
+
+.siteLogo{
+
+  height:72px;
+
+  width:auto;
+
+}
+
+.light-logo{
+
+  display:none;
+
+}
+
+.dark-logo{
+
+  display:block;
+
+}
+
+.light .light-logo{
+
+  display:block;
+
+}
+
+.light .dark-logo{
+
+  display:none;
+
+}
+
+/* ========================================== */
+/* MAP */
+/* ========================================== */
+
+.map{
+
+  margin:55px auto;
+
+  width:92%;
+  max-width:500px;
+
+  height:190px;
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  border:
+    2px solid
+    rgba(225,169,62,0.72);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.25);
+
+  display:block;
+
+  cursor:pointer;
+
+}
+
+.map iframe{
+
+  width:100%;
+  height:100%;
+
+  border:0;
+
+  pointer-events:none;
+
+}
+
+/* ========================================== */
+/* CONTROLS */
+/* ========================================== */
+
+.controls{
+
+  position:fixed;
+
+  bottom:
+    calc(
+      25px +
+      env(safe-area-inset-bottom)
+    );
+
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  z-index:3000;
+
+  display:flex;
+  align-items:center;
+
+  gap:0;
+
+  height:84px;
+
+  padding:
+    0 26px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #041f24,
+      #063842
+    );
+
+  border:
+    2px solid
+    rgba(225,169,62,0.78);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.35);
+
+  transition:
+    transform .35s ease,
+    opacity .35s ease,
+    bottom .35s ease;
+
+}
+
+.controls::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:999px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,255,255,0.05),
+      transparent 42%
+    );
+
+  pointer-events:none;
+
+}
+
+/* divider */
+
+.ctrlDivider{
+
+  width:1px;
+
+  height:34px;
+
+  background:
+    rgba(225,169,62,0.35);
+
+  margin:0 14px;
+
+}
+
+/* buttons */
+
+.controls div{
+
+  width:62px;
+  height:62px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+  font-size:28px;
+
+  color:var(--gold);
+
+  transition:
+    .35s cubic-bezier(
+      .175,
+      .885,
+      .32,
+      1.275
+    );
+
+}
+
+.controls div:hover{
+
+  transform:
+    translateY(-2px)
+    scale(1.08);
+
+  background:
+    rgba(225,169,62,0.08);
+
+}
+
+/* tooltips */
+
+.controls div::before{
+
+  content:attr(data-tooltip);
+
+  position:absolute;
+
+  bottom:125%;
+  left:50%;
+
+  transform:
+    translateX(-50%)
+    translateY(10px);
+
+  background:
+    rgba(10,30,35,0.82);
+
+  color:var(--gold);
+
+  padding:
+    8px 15px;
+
+  border-radius:14px;
+
+  font-size:14px;
+  font-weight:800;
+
+  white-space:nowrap;
+
+  opacity:0;
+  visibility:hidden;
+
+  pointer-events:none;
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
+  border:
+    1px solid
+    rgba(225,169,62,0.18);
+
+  transition:
+    .35s cubic-bezier(.175,.885,.32,1.275);
+
+}
+
+.controls div:hover::before{
+
+  opacity:1;
+  visibility:visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+/* mini mode */
+
+.controls.controls-mini{
+
+  transform:
+    translateX(-50%)
+    scale(.86);
+
+  opacity:.50;
+
+  bottom:
+    calc(
+      14px +
+      env(safe-area-inset-bottom)
+    );
+
+}
+
+.controls.controls-mini:hover{
+
+  transform:
+    translateX(-50%)
+    scale(1);
+
+  opacity:1;
+
+}
+
+/* ========================================== */
+/* LIGHT MODE */
+/* ========================================== */
+
+.light .iconBtn{
+
+  color:var(--main);
+
+  border:
+    1px solid
+    rgba(0,0,0,0.04);
+
+  background:
+    rgba(248,244,236,0.78);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.55);
+
+}
+
+.light .iconBtn::after{
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,255,255,0.45),
+      transparent 42%
+    );
+
+}
+
+.light .iconBtn:hover{
+
+  color:var(--gold) !important;
+
+  border-color:
+    rgba(225,169,62,0.45);
+
+  background:
+    rgba(252,248,242,0.50);
+
+  box-shadow:
+    0 22px 38px rgba(0,0,0,0.10),
+    0 0 0 1px rgba(225,169,62,0.10);
+
+}
+
+/* ========================================== */
+/* FOOTER */
+/* ========================================== */
+
+.footer{
+
+  margin-top:40px;
+
+  opacity:.5;
+
+  font-size:13px;
+
+  font-weight:500;
+
+}
+
+/* ========================================== */
+/* MOBILE */
+/* ========================================== */
+
+@media(max-width:600px){
+
+  .logoWrap{
+
+    min-height:120px;
+
+  }
+
+  .logo{
+
+    width:200px;
+
+  }
+
+  .iconGrid{
+
+    gap:20px;
+
+  }
+
+  .iconBtn{
+
+    width:88px;
+    height:88px;
+
+    border-radius:26px;
+
+    font-size:38px;
+
+  }
+
+  .full-width-btn{
+
+    height:84px;
+
+    font-size:16px;
+
+  }
+
+  .controls{
+
+    height:74px;
+
+    padding:0 18px;
+
+  }
+
+  .controls div{
+
+    width:52px;
+    height:52px;
+
+    font-size:24px;
+
+  }
+
+}
+
+</style>
+
 </head>
 
 <body class="lang-ar">
 
 <div class="pageWrapper">
-    <header class="logoStrip" id="mainHeader">
-        <img class="logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-site.png" alt="Nadim Logo">
-    </header>
 
-    <div class="iconGrid">
-        
-        <a class="iconBtn full-width-btn website" href="https://www.nadimfoundation.org/" id="webBtn" data-ar="موقعنا" data-en="Our Website">
-            <img class="siteLogo light-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.svg" alt="Icon Left">
-            <img class="siteLogo dark-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-light.png" alt="Icon Left">
-            
-            <span id="webText">Nadim Foundation</span>
-            
-            <img class="siteLogo light-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.svg" alt="Icon Right">
-            <img class="siteLogo dark-logo" src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-light.png" alt="Icon Right">
-        </a>
+<!-- ========================================== -->
+<!-- HEADER -->
+<!-- ========================================== -->
 
-        <a class="iconBtn" href="https://www.facebook.com/share/1Ak98MWsP4/" data-ar="فيسبوك" data-en="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a class="iconBtn" href="https://www.instagram.com/nadimfoundation" data-ar="إنستجرام" data-en="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="iconBtn" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA" data-ar="يوتيوب" data-en="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a class="iconBtn" href="https://www.linkedin.com/company/nadimfoundation/" data-ar="لينكد إن" data-en="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a class="iconBtn" href="mailto:info@nadimfoundation.org" data-ar="بريد إلكتروني" data-en="Email"><i class="fa-solid fa-envelope"></i></a>
-        <a class="iconBtn" href="https://wa.me/201227799564" data-ar="واتساب" data-en="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-        
-        <a class="iconBtn full-width-btn newsletter" href="https://mailchi.mp/d9aa7403bb38/join-nadim-foundation-mailing-list" id="newsBtn" data-ar="اشترك معنا" data-en="Join Us">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span id="newsText">Subscribe to Our Newsletter</span>
-            <i class="fa-solid fa-envelope-open-text"></i>
-        </a>
-        
-    </div>
+<header
+  class="logoStrip"
+  id="mainHeader"
+>
 
-    <a href="https://maps.app.goo.gl/iK5uxCR1y6mTiyK86" target="_blank" class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.0958335888536!2d31.024196799999995!3d30.091441600000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585c79ad6b7e2d%3A0xe93b0ce5bf4942be!2sNADIM%20-%20Headquarters%20%26%20Factory!5e0!3m2!1sen!2seg!4v1776808419412!5m2!1sen!2seg" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </a>
+  <div class="logoWrap">
 
-    <div class="footer">Nadim Foundation ©® 2018</div>
+    <img
+      class="logo"
+      src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-site.png"
+      alt="Nadim Logo"
+    >
+
+  </div>
+
+</header>
+
+<!-- ========================================== -->
+<!-- GRID -->
+<!-- ========================================== -->
+
+<div class="iconGrid">
+
+  <!-- WEBSITE -->
+
+  <a
+    class="iconBtn full-width-btn website"
+    href="https://www.nadimfoundation.org/"
+    id="webBtn"
+    data-ar="موقعنا"
+    data-en="Our Website"
+  >
+
+    <img
+      class="siteLogo light-logo"
+      src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.svg"
+    >
+
+    <img
+      class="siteLogo dark-logo"
+      src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-light.png"
+    >
+
+    <span id="webText">
+      Nadim Foundation
+    </span>
+
+    <img
+      class="siteLogo light-logo"
+      src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim.svg"
+    >
+
+    <img
+      class="siteLogo dark-logo"
+      src="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-nadim-light.png"
+    >
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- FACEBOOK -->
+
+  <a
+    class="iconBtn"
+    href="https://www.facebook.com/share/1Ak98MWsP4/"
+    data-ar="فيسبوك"
+    data-en="Facebook"
+  >
+
+    <i class="fa-brands fa-facebook-f"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- INSTAGRAM -->
+
+  <a
+    class="iconBtn"
+    href="https://www.instagram.com/nadimfoundation"
+    data-ar="إنستجرام"
+    data-en="Instagram"
+  >
+
+    <i class="fa-brands fa-instagram"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- YOUTUBE -->
+
+  <a
+    class="iconBtn"
+    href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA"
+    data-ar="يوتيوب"
+    data-en="YouTube"
+  >
+
+    <i class="fa-brands fa-youtube"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- LINKEDIN -->
+
+  <a
+    class="iconBtn"
+    href="https://www.linkedin.com/company/nadimfoundation/"
+    data-ar="لينكد إن"
+    data-en="LinkedIn"
+  >
+
+    <i class="fa-brands fa-linkedin-in"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- EMAIL -->
+
+  <a
+    class="iconBtn"
+    href="mailto:info@nadimfoundation.org"
+    data-ar="بريد إلكتروني"
+    data-en="Email"
+  >
+
+    <i class="fa-solid fa-envelope"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- WHATSAPP -->
+
+  <a
+    class="iconBtn"
+    href="https://wa.me/201227799564"
+    data-ar="واتساب"
+    data-en="WhatsApp"
+  >
+
+    <i class="fa-brands fa-whatsapp"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
+  <!-- NEWSLETTER -->
+
+  <a
+    class="iconBtn full-width-btn newsletter"
+    href="https://mailchi.mp/d9aa7403bb38/join-nadim-foundation-mailing-list"
+    id="newsBtn"
+    data-ar="اشترك معنا"
+    data-en="Join Us"
+  >
+
+    <i class="fa-solid fa-envelope-open-text"></i>
+
+    <span id="newsText">
+      Subscribe to Our Newsletter
+    </span>
+
+    <i class="fa-solid fa-envelope-open-text"></i>
+
+    <div class="goldLine"></div>
+
+  </a>
+
 </div>
 
+<!-- ========================================== -->
+<!-- MAP -->
+<!-- ========================================== -->
+
+<a
+  href="https://maps.app.goo.gl/iK5uxCR1y6mTiyK86"
+  target="_blank"
+  class="map"
+>
+
+<iframe
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.0958335888536!2d31.024196799999995!3d30.091441600000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585c79ad6b7e2d%3A0xe93b0ce5bf4942be!2sNADIM%20-%20Headquarters%20%26%20Factory!5e0!3m2!1sen!2seg!4v1776808419412!5m2!1sen!2seg"
+loading="lazy"
+></iframe>
+
+</a>
+
+<!-- ========================================== -->
+<!-- FOOTER -->
+<!-- ========================================== -->
+
+<div class="footer">
+
+  Nadim Foundation ©® 2018
+
+</div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- CONTROLS -->
+<!-- ========================================== -->
+
 <div class="controls">
-    <div onclick="share()" data-ar="مشاركة" data-en="Share">🔗</div>
-    <div id="themeBtn" onclick="toggleTheme()" data-ar="المظهر" data-en="Theme">☀️</div>
-    <div onclick="toggleLang()" data-ar="اللغة" data-en="Language">🌐</div>
+
+  <div
+    onclick="shareSite()"
+    data-ar="مشاركة"
+    data-en="Share"
+  >
+    ↗
+  </div>
+
+  <div class="ctrlDivider"></div>
+
+  <div
+    id="themeBtn"
+    onclick="toggleTheme()"
+    data-ar="المظهر"
+    data-en="Theme"
+  >
+    ☀️
+  </div>
+
+  <div class="ctrlDivider"></div>
+
+  <div
+    onclick="toggleLang()"
+    data-ar="اللغة"
+    data-en="Language"
+  >
+    🌐
+  </div>
+
 </div>
 
 <script>
-    const body = document.body;
-    const themeBtn = document.getElementById("themeBtn");
-    const webText = document.getElementById("webText");
-    const newsText = document.getElementById("newsText");
-    const mainHeader = document.getElementById("mainHeader"); 
-   
-    let controlsTimer;
-    const controlsEl = document.querySelector('.controls');
 
-    function expandControls() {
-        controlsEl.classList.remove('controls-mini');
-        clearTimeout(controlsTimer);
+/* ========================================== */
+/* ELEMENTS */
+/* ========================================== */
+
+const body =
+  document.body;
+
+const themeBtn =
+  document.getElementById(
+    "themeBtn"
+  );
+
+const webText =
+  document.getElementById(
+    "webText"
+  );
+
+const newsText =
+  document.getElementById(
+    "newsText"
+  );
+
+const mainHeader =
+  document.getElementById(
+    "mainHeader"
+  );
+
+const controlsEl =
+  document.querySelector(
+    ".controls"
+  );
+
+/* ========================================== */
+/* CONTROLS MINI */
+/* ========================================== */
+
+let controlsTimer;
+
+function expandControls(){
+
+  controlsEl.classList.remove(
+    "controls-mini"
+  );
+
+  clearTimeout(
+    controlsTimer
+  );
+
+}
+
+function resetControlsTimer(){
+
+  expandControls();
+
+  controlsTimer = setTimeout(
+
+    () => {
+
+      controlsEl.classList.add(
+        "controls-mini"
+      );
+
+    },
+
+    2500
+
+  );
+
+}
+
+window.addEventListener(
+  "scroll",
+  resetControlsTimer,
+  { passive:true }
+);
+
+window.addEventListener(
+  "touchstart",
+  resetControlsTimer,
+  { passive:true }
+);
+
+controlsEl.addEventListener(
+  "mouseenter",
+  expandControls
+);
+
+controlsEl.addEventListener(
+  "mouseleave",
+  resetControlsTimer
+);
+
+resetControlsTimer();
+
+/* ========================================== */
+/* LANGUAGE */
+/* ========================================== */
+
+const systemLang =
+  navigator.language ||
+  navigator.userLanguage;
+
+let currentLang =
+
+  systemLang.startsWith("ar")
+  ? "ar"
+  : "en";
+
+function updateLabels(){
+
+  document
+  .querySelectorAll(
+    "[data-ar]"
+  )
+
+  .forEach(el => {
+
+    const label =
+
+      el.getAttribute(
+        `data-${currentLang}`
+      );
+
+    el.setAttribute(
+      "data-tooltip",
+      label || ""
+    );
+
+  });
+
+  webText.innerHTML =
+
+    currentLang === "ar"
+
+    ? "مـــؤســسـة نــديــم"
+
+    : "Nadim Foundation";
+
+  newsText.innerHTML =
+
+    currentLang === "ar"
+
+    ? "اشترك في نشرتنا البريدية"
+
+    : "Subscribe to Our Newsletter";
+
+}
+
+function toggleLang(){
+
+  currentLang =
+
+    currentLang === "ar"
+    ? "en"
+    : "ar";
+
+  updateLabels();
+
+}
+
+/* ========================================== */
+/* THEME */
+/* ========================================== */
+
+function applyTheme(){
+
+  const savedTheme =
+    localStorage.getItem(
+      "theme"
+    );
+
+  const prefersDark =
+
+    window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+  let isLight;
+
+  if (savedTheme){
+
+    isLight =
+      savedTheme === "light";
+
+  } else {
+
+    isLight = !prefersDark;
+
+  }
+
+  if (isLight){
+
+    body.classList.add(
+      "light"
+    );
+
+    themeBtn.innerHTML =
+      "🌙";
+
+  } else {
+
+    body.classList.remove(
+      "light"
+    );
+
+    themeBtn.innerHTML =
+      "☀️";
+
+  }
+
+}
+
+function toggleTheme(){
+
+  body.classList.toggle(
+    "light"
+  );
+
+  const isLight =
+
+    body.classList.contains(
+      "light"
+    );
+
+  themeBtn.innerHTML =
+
+    isLight
+    ? "🌙"
+    : "☀️";
+
+  localStorage.setItem(
+
+    "theme",
+
+    isLight
+    ? "light"
+    : "dark"
+
+  );
+
+}
+
+/* ========================================== */
+/* SHARE */
+/* ========================================== */
+
+async function shareSite(){
+
+  try{
+
+    if (navigator.share){
+
+      await navigator.share({
+
+        title:
+          document.title,
+
+        url:
+          location.href
+
+      });
+
     }
 
-    function resetControlsTimer() {
-        expandControls();
-        controlsTimer = setTimeout(() => { controlsEl.classList.add('controls-mini'); }, 2500); 
+  } catch(err){}
+
+}
+
+/* ========================================== */
+/* HEADER SHRINK */
+/* ========================================== */
+
+window.addEventListener(
+
+  "scroll",
+
+  () => {
+
+    if (window.scrollY > 50){
+
+      mainHeader.classList.add(
+        "shrink"
+      );
+
+    } else {
+
+      mainHeader.classList.remove(
+        "shrink"
+      );
+
     }
 
-    window.addEventListener('scroll', resetControlsTimer, { passive: true });
-    window.addEventListener('touchstart', resetControlsTimer, { passive: true });
-    controlsEl.addEventListener('mouseenter', expandControls);
-    controlsEl.addEventListener('mouseleave', resetControlsTimer);
-    controlsEl.addEventListener('touchstart', resetControlsTimer, { passive: true });
-    resetControlsTimer();
-    
-    const systemLang = navigator.language || navigator.userLanguage;
-    let currentLang = systemLang.startsWith('ar') ? 'ar' : 'en';
+  },
 
-    // ==========================================
-    // جزء المظهر (Theme Logic) المحدث
-    // ==========================================
-    function applyTheme() {
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  { passive:true }
 
-        let isLight;
+);
 
-        if (savedTheme) {
-            isLight = savedTheme === "light";
-        } else {
-            isLight = !prefersDark;
-        }
+/* ========================================== */
+/* INIT */
+/* ========================================== */
 
-        if (isLight) {
-            body.classList.add("light");
-            themeBtn.innerHTML = "🌙";
-        } else {
-            body.classList.remove("light");
-            themeBtn.innerHTML = "☀️";
-        }
+window.onload = () => {
+
+  applyTheme();
+
+  updateLabels();
+
+};
+
+window.matchMedia(
+  "(prefers-color-scheme: dark)"
+)
+
+.addEventListener(
+
+  "change",
+
+  () => {
+
+    if (
+
+      !localStorage.getItem(
+        "theme"
+      )
+
+    ){
+
+      applyTheme();
+
     }
 
-    function toggleTheme() {
-        body.classList.toggle("light");
-        const isLight = body.classList.contains("light");
-        themeBtn.innerHTML = isLight ? "🌙" : "☀️";
-        localStorage.setItem("theme", isLight ? "light" : "dark");
-    }
+  }
 
-    // ==========================================
-    // جزء اللغة (Language Logic) بعد تنظيفه
-    // ==========================================
-    function updateLabels() {
-        document.querySelectorAll('[data-ar]').forEach(el => {
-            const label = el.getAttribute(`data-${currentLang}`);
-            el.setAttribute('data-tooltip', label || '');
-        });
-        
-        webText.innerHTML = currentLang === 'ar' ? "مـــؤســسـة نــديــم" : "Nadim Foundation";
-        newsText.innerHTML = currentLang === 'ar' ? "اشترك في نشرتنا البريدية" : "Subscribe to Our Newsletter";
-    }
+);
 
-    function toggleLang() {
-        currentLang = currentLang === 'ar' ? 'en' : 'ar';
-        updateLabels();
-    }
-
-    // ==========================================
-    // باقي الوظائف (مشاركة، سكرول، الخ)
-    // ==========================================
-    function share() {
-        if (navigator.share) {
-            navigator.share({ title: "Nadim Foundation", url: window.location.href });
-        } else {
-            navigator.clipboard.writeText(window.location.href);
-            alert(currentLang === 'ar' ? "تم نسخ الرابط!" : "Link Copied!");
-        }
-    }
-
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            mainHeader.classList.add("shrink");
-        } else {
-            mainHeader.classList.remove("shrink");
-        }
-    }, { passive: true });
-
-    // ==========================================
-    // عند تحميل الصفحة
-    // ==========================================
-    window.onload = () => {
-        applyTheme();
-        updateLabels();
-    };
-
-    // الاستماع لتغيير مظهر الجهاز تلقائياً
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem("theme")) {
-            applyTheme();
-        }
-    });
 </script>
 
 </body>
