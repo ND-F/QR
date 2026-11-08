@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nadim Foundation - مؤسسة نديم</title>
+    <meta name="description" content="Nadim Foundation: where heritage meets its people. Website, social media, contact and location.">
+    <meta property="og:title" content="Nadim Foundation - مؤسسة نديم">
+    <meta property="og:description" content="Where heritage meets its people">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ND-F/Q/main/images/logo-h-teal.png">
+    <meta name="theme-color" content="#06444C" id="themeColor">
+
+    <link rel="icon" type="image/svg+xml" href="images/icon-teal.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="images/icon-beige.svg" media="(prefers-color-scheme: dark)">
+
+    <!-- اللغة والمظهر بيتحددوا هنا قبل ما الصفحة تترسم، عشان مفيش وميض -->
+    <script>
+        (function () {
+            var root = document.documentElement, lang = null, theme = null;
+            try { lang = localStorage.getItem("nadim_qr_lang"); theme = localStorage.getItem("nadim_qr_theme"); } catch (e) {}
+            if (!lang) lang = (navigator.language || "en").toLowerCase().indexOf("ar") === 0 ? "ar" : "en";
+            if (!theme) theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+            root.lang = lang;
+            root.dir = lang === "ar" ? "rtl" : "ltr";
+            root.dataset.theme = theme;
+            document.getElementById("themeColor").content = theme === "light" ? "#EAE8D8" : "#06444C";
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --teal: #06444C;
+            --beige: #EAE8D8;
+            --gold: #E1A93E;
+
+            --bg: var(--teal);
+            --ink: var(--beige);
+            --muted: rgba(234, 232, 216, 0.74);
+            --card: rgba(234, 232, 216, 0.08);
+            --card-hover: rgba(234, 232, 216, 0.14);
+            --line: rgba(234, 232, 216, 0.2);
+            --pattern: url("images/pattern-beige.svg");
+            --pattern-opacity: 0.04;
+        }
+        [data-theme="light"] {
+            --bg: var(--beige);
+            --ink: var(--teal);
+            --muted: rgba(6, 68, 76, 0.76);
+            --card: #F5F4EA;
+            --card-hover: #FFFFFF;
+            --line: rgba(6, 68, 76, 0.18);
+            --pattern: url("images/pattern-teal.svg");
+            --pattern-opacity: 0.05;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Tajawal", sans-serif;
+            font-weight: 500;
+            line-height: 1.4;
+            background: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-image: var(--pattern);
+            background-size: 55px 55px;
+            background-position: center;
+            opacity: var(--pattern-opacity);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* كل نص موجود باللغتين، وبيظهر بتاع اللغة الحالية بس */
+        html[lang="ar"] [lang="en"], html[lang="en"] [lang="ar"] { display: none; }
+
+        .sr {
+            position: absolute; width: 1px; height: 1px; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+        .page {
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+            padding: calc(16px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
+        }
+
+        /* الهيدر: لوجو واحد وأدوات صغيرة في الركن */
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .logo { display: block; height: 46px; width: auto; }
+        .logo-light { display: none; }
+        [data-theme="light"] .logo-light { display: block; }
+        [data-theme="light"] .logo-dark { display: none; }
+
+        .tools { display: flex; gap: 2px; margin-inline-end: -10px; }
+        .tool {
+            width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0; border: 0; border-radius: 12px;
+            background: transparent;
+            color: var(--ink);
+            font-family: inherit; font-size: 17px; font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .tool:active { background: var(--card-hover); }
+        .fa-moon { display: none; }
+        [data-theme="light"] .fa-moon { display: block; }
+        [data-theme="light"] .fa-sun { display: none; }
+
+        /* التعريف */
+        h1 {
+            margin: 30px 0 22px;
+            font-size: 31px;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: 0;
+        }
+        html[lang="en"] h1 { font-size: 29px; line-height: 1.22; }
+
+        /* الزرار الرئيسي: الوحيد الذهبي في الصفحة */
+        .primary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 62px;
+            padding: 0 22px;
+            border-radius: 16px;
+            background: var(--gold);
+            color: var(--teal);
+            font-size: 19px;
+            font-weight: 800;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+        .primary i { font-size: 18px; }
+        [dir="rtl"] .primary i { transform: scaleX(-1); }
+        .primary:active { transform: translateY(1px); filter: brightness(0.94); }
+
+        section { margin-top: 30px; }
+        h2 {
+            margin: 0 0 12px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .tile, .row, .place {
+            background: var(--card);
+            border: 1px solid var(--line);
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+        .tile:active, .row:active, .place:active { background: var(--card-hover); }
+
+        /* تابعنا */
+        .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+        .tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 88px;
+            padding: 0 2px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .tile i { font-size: 25px; line-height: 1; }
+
+        /* كلمنا */
+        .rows { display: flex; flex-direction: column; gap: 8px; }
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 66px;
+            padding: 10px 16px;
+            border-radius: 14px;
+        }
+        .row > i:first-child { flex: 0 0 26px; font-size: 22px; text-align: center; }
+        .row-text { flex: 1 1 auto; min-width: 0; }
+        .row-title { display: block; font-size: 16px; font-weight: 700; }
+        .row-value { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+        [dir="rtl"] bdi.row-value { text-align: right; }
+        .chevron { font-size: 13px; color: var(--muted); }
+        [dir="rtl"] .chevron { transform: scaleX(-1); }
+
+        .place { display: block; overflow: hidden; border-radius: 14px; }
+        .place-map { display: block; width: 100%; height: 120px; }
+        .place-map iframe { display: block; width: 100%; height: 100%; border: 0; pointer-events: none; }
+        .place .place-row { display: flex; align-items: center; gap: 14px; min-height: 66px; padding: 10px 16px; }
+        .place-row > i:first-child { flex: 0 0 26px; font-size: 22px; text-align: center; }
+
+        footer {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(24px + env(safe-area-inset-bottom));
+            transform: translate(-50%, 16px);
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: var(--ink);
+            color: var(--bg);
+            font-size: 15px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+        @media (hover: hover) {
+            .tool:hover { background: var(--card-hover); }
+            .primary:hover { filter: brightness(1.06); transform: translateY(-2px); }
+            .tile:hover, .row:hover, .place:hover {
+                background: var(--card-hover);
+                border-color: var(--ink);
+                transform: translateY(-2px);
+            }
+        }
+
+        @media (max-width: 340px) {
+            .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            h1 { font-size: 26px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+    </style>
+</head>
+
+<body>
+<main class="page">
+
+    <header class="top">
+        <div>
+            <img class="logo logo-dark" src="images/logo-h-beige.svg" alt="NADIM نديم">
+            <img class="logo logo-light" src="images/logo-h-teal.svg" alt="NADIM نديم">
+        </div>
+        <div class="tools">
+            <button class="tool" id="shareBtn" type="button">
+                <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+                <span class="sr" lang="ar">مشاركة</span><span class="sr" lang="en">Share</span>
+            </button>
+            <button class="tool" id="themeBtn" type="button">
+                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                <span class="sr" lang="ar">تغيير المظهر</span><span class="sr" lang="en">Change theme</span>
+            </button>
+            <button class="tool" id="langBtn" type="button">
+                <span lang="ar">EN</span><span lang="en">ع</span>
+                <span class="sr" lang="ar">English</span><span class="sr" lang="en">العربية</span>
+            </button>
+        </div>
+    </header>
+
+    <h1>
+        <span lang="ar">حيث يلتقي التراث بأهله</span>
+        <span lang="en">Where heritage meets its people</span>
+    </h1>
+
+    <a class="primary" href="https://www.nadimfoundation.org/">
+        <span><span lang="ar">زور موقعنا</span><span lang="en">Visit our website</span></span>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+
+    <section>
+        <h2><span lang="ar">تابعنا</span><span lang="en">Follow us</span></h2>
+        <div class="tiles">
+            <a class="tile" href="https://www.facebook.com/share/1Ak98MWsP4/"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i><span><span lang="ar">فيسبوك</span><span lang="en">Facebook</span></span></a>
+            <a class="tile" href="https://www.instagram.com/nadimfoundation"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span><span lang="ar">إنستجرام</span><span lang="en">Instagram</span></span></a>
+            <a class="tile" href="https://www.youtube.com/channel/UCkTYJGluhZ36xbojMuXnKTA"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span><span lang="ar">يوتيوب</span><span lang="en">YouTube</span></span></a>
+            <a class="tile" href="https://www.linkedin.com/company/nadimfoundation/"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i><span><span lang="ar">لينكد إن</span><span lang="en">LinkedIn</span></span></a>
+        </div>
+    </section>
+
+    <section>
+        <h2><span lang="ar">كلمنا</span><span lang="en">Contact us</span></h2>
+        <div class="rows">
+            <a class="row" href="https://wa.me/201227799564">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <span class="row-text">
+                    <span class="row-title"><span lang="ar">واتساب</span><span lang="en">WhatsApp</span></span>
+                    <bdi class="row-value" dir="ltr">+20 122 779 9564</bdi>
+                </span>
+                <i class="fa-solid fa-chevron-right chevron" aria-hidden="true"></i>
+            </a>
+            <a class="row" href="mailto:info@nadimfoundation.org">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <span class="row-text">
+                    <span class="row-title"><span lang="ar">البريد الإلكتروني</span><span lang="en">Email</span></span>
+                    <bdi class="row-value" dir="ltr">info@nadimfoundation.org</bdi>
+                </span>
+                <i class="fa-solid fa-chevron-right chevron" aria-hidden="true"></i>
+            </a>
+            <a class="place" href="https://maps.app.goo.gl/iK5uxCR1y6mTiyK86" target="_blank" rel="noopener">
+                <span class="place-map">
+                    <iframe title="Nadim on Google Maps" tabindex="-1" aria-hidden="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.0958335888536!2d31.024196799999995!3d30.091441600000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585c79ad6b7e2d%3A0xe93b0ce5bf4942be!2sNADIM%20-%20Headquarters%20%26%20Factory!5e0!3m2!1sen!2seg!4v1776808419412!5m2!1sen!2seg"></iframe>
+                </span>
+                <span class="place-row">
+                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    <span class="row-text">
+                        <span class="row-title"><span lang="ar">المقر والمصنع</span><span lang="en">Headquarters &amp; Factory</span></span>
+                        <span class="row-value"><span lang="ar">افتح الاتجاهات</span><span lang="en">Get directions</span></span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right chevron" aria-hidden="true"></i>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <h2><span lang="ar">النشرة البريدية</span><span lang="en">Newsletter</span></h2>
+        <a class="row" href="https://mailchi.mp/d9aa7403bb38/join-nadim-foundation-mailing-list">
+            <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+            <span class="row-text">
+                <span class="row-title"><span lang="ar">اشترك في نشرتنا البريدية</span><span lang="en">Subscribe to our newsletter</span></span>
+            </span>
+            <i class="fa-solid fa-chevron-right chevron" aria-hidden="true"></i>
+        </a>
+    </section>
+
+    <footer><span lang="ar">مؤسسة نديم © 2026</span><span lang="en">Nadim Foundation © 2026</span></footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+    const root = document.documentElement;
+
+    function save(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) {}
+    }
+    function saved(key) {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function setTheme(theme) {
+        root.dataset.theme = theme;
+        document.getElementById("themeColor").content = theme === "light" ? "#EAE8D8" : "#06444C";
+    }
+
+    document.getElementById("themeBtn").addEventListener("click", () => {
+        const next = root.dataset.theme === "light" ? "dark" : "light";
+        setTheme(next);
+        save("nadim_qr_theme", next);
+    });
+
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+        if (!saved("nadim_qr_theme")) setTheme(e.matches ? "light" : "dark");
+    });
+
+    document.getElementById("langBtn").addEventListener("click", () => {
+        const next = root.lang === "ar" ? "en" : "ar";
+        root.lang = next;
+        root.dir = next === "ar" ? "rtl" : "ltr";
+        save("nadim_qr_lang", next);
+    });
+
+    let toastTimer;
+    function toast(message) {
+        const el = document.getElementById("toast");
+        el.textContent = message;
+        el.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
+    }
+
+    document.getElementById("shareBtn").addEventListener("click", async () => {
+        const url = window.location.href;
+        if (navigator.share) {
+            try { await navigator.share({ title: "Nadim Foundation", url }); } catch (e) {}
+            return;
+        }
+        try {
+            await navigator.clipboard.writeText(url);
+            toast(root.lang === "ar" ? "تم نسخ الرابط" : "Link copied");
+        } catch (e) {
+            toast(url);
+        }
+    });
+</script>
+</body>
+</html>
